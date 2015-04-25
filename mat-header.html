@@ -1,0 +1,252 @@
+<!--
+@license
+Copyright (c) 2015 The expand.js authors. All rights reserved.
+This code may only be used under the BSD style license found at https://expandjs.github.io/LICENSE.txt
+The complete set of authors may be found at https://expandjs.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://expandjs.github.io/CONTRIBUTORS.txt
+-->
+
+<!--
+This component is used to display a material app bar.
+It should be used in conjunction with mat-header-panel.
+
+@component mat-header
+@description This component is used to display a material app bar.
+
+@dependency polymer Polymer/polymer#^0.5
+@dependency expandjs ExpandJS/expandjs
+@dependency mat-divider ExpandJS/mat-divider
+@dependency mat-icon-button ExpandJS/mat-icon-button
+@dependency mat-paper ExpandJS/mat-paper
+@dependency xp-device ExpandJS/xp-device
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../expandjs/expandjs.html">
+<link rel="import" href="../mat-divider/mat-divider.html">
+<link rel="import" href="../mat-icon-button/mat-icon-button.html">
+<link rel="import" href="../mat-paper/mat-paper.html">
+<link rel="import" href="../xp-device/xp-device.html">
+
+<polymer-element name="mat-header" constructor="MATHeaderElement" attributes="background emptyExtended">
+
+    <template>
+        <style>
+            :host {
+                display: block;
+                position: relative;
+                text-align: left;
+
+                /* HEADLINE */
+                font-size: 24px;
+                font-weight: 400;
+                letter-spacing: 0;
+                line-height: 32px;
+                text-overflow: clip;
+                white-space: normal;
+            }
+
+            :host #matHeaderWrapper {
+                border-radius: inherit;
+                overflow: visible;
+            }
+
+            :host #matHeaderExtended {
+                -ms-flex-order: 2;
+                order: 2;
+                padding: 0 24px 0 80px;
+            }
+
+            :host-context([mobile]:not([device="tablet"])) #matHeaderExtended {
+                padding: 0 16px 0 72px;
+            }
+
+            :host #matHeaderExtended ::content mat-tabs {
+                margin: 0 -24px 0 -80px;
+            }
+
+            :host-context([mobile]:not([device="tablet"])) #matHeaderExtended ::content mat-tabs {
+                margin: 0 -16px 0 -72px;
+            }
+
+            :host #matHeaderMain {
+                height: 64px;
+                -ms-flex-order: 1;
+                order: 1;
+                overflow: hidden;
+                padding: 0 12px 0 24px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            :host-context([mobile]:not([device="tablet"])) #matHeaderMain {
+                height: 56px;
+                padding: 0 4px 0 16px;
+            }
+
+            :host #matHeaderNavButton {
+                margin: 4px 24px 4px -8px;
+            }
+        </style>
+        <mat-paper id="matHeaderWrapper" background="{{background}}" brightness="{{drawer ? '' : 'header'}}" z="{{z}}" vertical layout>
+            <div id="matHeaderExtended" hidden?="{{emptyExtended}}">
+                <content id="extendedContent" select="[extended]"></content>
+            </div>
+            <div id="matHeaderMain" horizontal layout center>
+                <template if="{{drawerPanel && main && !drawerPanel.emptyDrawer}}"><mat-icon-button id="matHeaderNavButton" hidden?="{{!drawerPanel.drawerNarrow}}" icon="navigation:menu" target="{{drawerPanel}}"></mat-icon-button></template>
+                <template if="{{drawerPanel && right && drawer}}"><mat-icon-button id="matHeaderHideButton" icon="navigation:close" invokes="hideRight" target="{{drawerPanel}}"></mat-icon-button></template>
+                <content id="content"></content>
+            </div>
+            <mat-divider id="matHeaderDivider" hidden?="{{z}}" baseline></mat-divider>
+        </mat-paper>
+    </template>
+
+    <script>
+        XPComponent({
+
+            /**
+             * Refreshes the element.
+             *
+             * @method refresh
+             * @returns {Element}
+             * @private
+             */
+            refresh: function () {
+
+                // Vars
+                var self     = this,
+                    mode     = self.headerPanel ? self.headerPanel.mode : 'default',
+                    scrolled = self.headerPanel ? self.headerPanel.scrolled : 0;
+
+                // Setting
+                self.z = XP.includes(['default', 'fixed'], mode) || (mode === 'waterfall' && scrolled) ? 1 : 0;
+
+                return self;
+            },
+
+            /*********************************************************************/
+
+            // OBSERVE
+            observe: {
+                'headerPanel.mode headerPanel.scrolled': 'refresh'
+            },
+
+            // PUBLISH
+            publish: {
+
+                /**
+                 * The paper's background color.
+                 *
+                 * @attribute background
+                 * @type string
+                 * @default ""
+                 */
+                background: {reflect: true, value: ''},
+
+                /**
+                 * If set to true, the extended is hidden.
+                 *
+                 * @attribute emptyExtended
+                 * @type boolean
+                 * @default false
+                 * @readonly
+                 */
+                emptyExtended: {reflect: true, value: false}
+            },
+
+            /**
+             * If set to true, the element's is into a drawer panel's drawer.
+             *
+             * @attribute drawer
+             * @type boolean
+             * @default false
+             * @readonly
+             */
+            drawer: false,
+
+            /**
+             * The parent drawer panel.
+             *
+             * @attribute drawerPanel
+             * @type Element
+             * @readonly
+             */
+            drawerPanel: null,
+
+            /**
+             * The parent header panel.
+             *
+             * @attribute headerPanel
+             * @type Element
+             * @readonly
+             */
+            headerPanel: null,
+
+            /**
+             * If set to true, the element's is into a drawer panel's main.
+             *
+             * @attribute main
+             * @type boolean
+             * @default false
+             * @readonly
+             */
+            main: false,
+
+            /**
+             * If set to true, the element's is into a drawer panel's right drawer.
+             *
+             * @attribute right
+             * @type boolean
+             * @default false
+             * @readonly
+             */
+            right: false,
+
+            /**
+             * The paper's z-axis position.
+             *
+             * @attribute z
+             * @type number
+             * @default 0
+             * @private
+             */
+            z: 0,
+
+            /*********************************************************************/
+
+            // LISTENER
+            attached: function () {
+                var self = this;
+                self.drawer      = XP.isElement(XP.findParentElement(self, '[drawer]'));
+                self.drawerPanel = XP.findParentElement(self, 'mat-drawer-panel');
+                self.headerPanel = XP.findParentElement(self, 'mat-header-panel');
+                self.main        = XP.isElement(XP.findParentElement(self, '[main]'));
+                self.right       = self.drawer && XP.matches(XP.findParentElement(self, '[drawer]'), '[right]');
+                self.mutated();
+            },
+
+            // LISTENER
+            created: function () {
+                this.setAttribute('header', '');
+            },
+
+            // LISTENER
+            detached: function () {
+                var self = this;
+                self.drawer      = false;
+                self.drawerPanel = null;
+                self.headerPanel = null;
+                self.main        = false;
+                self.right       = false;
+            },
+
+            // LISTENER
+            mutated: function () {
+                var self = this;
+                self.emptyExtended = !XP.isContent(self.$.extendedContent, true);
+                XP.onMutation(self, self.mutated.bind(self));
+            }
+        });
+    </script>
+
+</polymer-element>

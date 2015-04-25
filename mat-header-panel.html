@@ -1,0 +1,259 @@
+<!--
+@license
+Copyright (c) 2015 The expand.js authors. All rights reserved.
+This code may only be used under the BSD style license found at https://expandjs.github.io/LICENSE.txt
+The complete set of authors may be found at https://expandjs.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://expandjs.github.io/CONTRIBUTORS.txt
+-->
+
+<!--
+This component is used to display a material scrollable wrapper with an app bar at the top.
+It should be used in conjunction with mat-header.
+
+@component mat-header-panel
+@description This component is used to display a material scrollable wrapper with an app bar at the top.
+
+@dependency polymer Polymer/polymer#^0.5
+@dependency expandjs ExpandJS/expandjs
+@dependency mat-paper ExpandJS/mat-paper
+
+@devDependency mat-content ExpandJS/mat-content
+@devDependency mat-demo ExpandJS/mat-demo
+@devDependency mat-menu ExpandJS/mat-menu
+@devDependency mat-option ExpandJS/mat-option
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../expandjs/expandjs.html">
+<link rel="import" href="../mat-paper/mat-paper.html">
+<link rel="import" href="mat-header.html">
+
+<polymer-element name="mat-header-panel" constructor="MATHeaderPanelElement" attributes="background drawer emptyFooter main mode right scrolled theme">
+
+    <template>
+        <style>
+            :host {
+                display: block;
+                overflow: visible;
+                text-align: left;
+
+                /* FIT */
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            :host #matHeaderPanelWrapper {
+                background: transparent;
+                overflow: visible;
+            }
+
+            :host #matHeaderPanelMain {
+                height: 100%;
+                -ms-flex-order: 1;
+                order: 1;
+            }
+
+            :host #matHeaderPanelHeader,
+            :host #matHeaderPanelBody,
+            :host #matHeaderPanelFooter {
+                position: relative;
+            }
+
+            :host #matHeaderPanelHeader,
+            :host #matHeaderPanelFooter {
+                z-index: 1;
+            }
+
+            :host #matHeaderPanelFooter {
+                -ms-flex-order: 2;
+                order: 2;
+            }
+
+            :host [scroller] {
+                overflow-y: auto;
+            }
+        </style>
+        <mat-paper id="matHeaderPanelWrapper" background="{{background}}" vertical layout fit>
+            <div id="matHeaderPanelFooter" hidden?="{{emptyFooter}}">
+                <content id="footerContent" select="[footer]"></content>
+            </div>
+            <div id="matHeaderPanelMain" on-scroll="{{handleScroll}}" vertical layout flex>
+                <div id="matHeaderPanelHeader">
+                    <content id="headerContent" select="[header]"></content>
+                </div>
+                <div id="matHeaderPanelBody" vertical layout flex>
+                    <div id="matHeaderPanelScroller" on-scroll="{{handleScroll}}" flex>
+                        <content id="bodyContent"></content>
+                    </div>
+                </div>
+            </div>
+        </mat-paper>
+    </template>
+
+    <script>
+        XPComponent({
+
+            /**
+             * Refreshes the element.
+             *
+             * @method refresh
+             * @returns {Element}
+             * @private
+             */
+            refresh: function () {
+                var self = this;
+                XP.assign(self, {scroller: self.$[XP.includes(['fixed', 'waterfall'], self.mode) ? 'matHeaderPanelScroller' : 'matHeaderPanelMain']});
+                XP.setStyle(self.$.matHeaderPanelHeader, 'top', 0);
+                return self;
+            },
+
+            /*********************************************************************/
+
+            // OBSERVE
+            observe: {
+                'mode': 'refresh'
+            },
+
+            // PUBLISH
+            publish: {
+
+                /**
+                 * The paper's background color.
+                 *
+                 * @attribute background
+                 * @type string
+                 * @default ""
+                 */
+                background: {reflect: true, value: ''},
+
+                /**
+                 * If set to true, the element's is into a drawer panel's drawer.
+                 *
+                 * @attribute drawer
+                 * @type boolean
+                 * @default false
+                 */
+                drawer: {reflect: true, value: false},
+
+                /**
+                 * If set to true, the footer is is hidden.
+                 *
+                 * @attribute emptyFooter
+                 * @type boolean
+                 * @default false
+                 * @readonly
+                 */
+                emptyFooter: {reflect: true, value: false},
+
+                /**
+                 * If set to true, the element's is into a drawer panel's main.
+                 *
+                 * @attribute main
+                 * @type boolean
+                 * @default false
+                 */
+                main: {reflect: true, value: false},
+
+                /**
+                 * The header panel's scroll mode.
+                 *
+                 * @attribute mode
+                 * @type string
+                 * @default "default"
+                 */
+                mode: {reflect: true, value: 'default'},
+
+                /**
+                 * If set to true, the element's is into a drawer panel's right drawer.
+                 *
+                 * @attribute right
+                 * @type boolean
+                 * @default false
+                 */
+                right: {reflect: true, value: false},
+
+                /**
+                 * The header panel's scroll amount.
+                 *
+                 * @attribute scrolled
+                 * @type number
+                 * @default 0
+                 * @readonly
+                 */
+                scrolled: {reflect: false, value: 0}
+            },
+
+            /**
+             * The list of scroll modes.
+             *
+             * @property modes
+             * @type Array
+             * @default ["default", "fixed", "seamed", "waterfall"]
+             * @readonly
+             */
+            modes: ['default', 'fixed', 'seamed', 'waterfall'],
+
+            /**
+             * The header panel's scrolling element.
+             *
+             * @property scroller
+             * @type Element
+             * @readonly
+             */
+            scroller: null,
+
+            /*********************************************************************/
+
+            // OBSERVER
+            scrollerChanged: function (pre, post) {
+                XP.removeAttribute(pre, 'scroller');
+                XP.addAttribute(post, 'scroller');
+            },
+
+            /*********************************************************************/
+
+            // LISTENER
+            attached: function () {
+                this.mutated();
+            },
+
+            // LISTENER
+            mutated: function () {
+                var self = this;
+                self.emptyFooter = !XP.isContent(self.$.footerContent, true);
+                XP.onMutation(self, self.mutated.bind(self));
+            },
+
+            // LISTENER
+            ready: function() {
+                this.refresh();
+            },
+
+            /*********************************************************************/
+
+            // HANDLER
+            handleScroll: function () {
+
+                // Vars
+                var self     = this,
+                    header   = self.$.matHeaderPanelHeader,
+                    scrolled = self.scroller.scrollTop;
+
+                // Stylizing
+                switch (self.mode) {
+                case 'default':
+                    if (self.scrolled <= scrolled) { break; }
+                    XP.setStyle(header, 'top', scrolled + 'px');
+                    break;
+                }
+
+                // Setting
+                self.scrolled = scrolled;
+            }
+        });
+    </script>
+
+</polymer-element>

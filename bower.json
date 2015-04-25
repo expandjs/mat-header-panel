@@ -1,0 +1,32 @@
+{
+  "name": "mat-header-panel",
+  "license": "BSD-3-Clause",
+  "version": "0.8.0",
+  "description": "This component is used to display a material scrollable wrapper with an app bar at the top.",
+  "authors": [
+    "Giuliano Rullo <g.rullo@expandjs.com>",
+    "Maurizio Stefàno <m.stefano@expandjs.com>",
+    "Robert Manolea <r.manolea@expandjs.com>"
+  ],
+  "main": [
+    "mat-header-panel.html",
+    "mat-header.html"
+  ],
+  "keywords": [
+    "web-components"
+  ],
+  "dependencies": {
+    "expandjs": "ExpandJS/expandjs",
+    "mat-divider": "ExpandJS/mat-divider",
+    "mat-icon-button": "ExpandJS/mat-icon-button",
+    "mat-paper": "ExpandJS/mat-paper",
+    "xp-device": "ExpandJS/xp-device",
+    "polymer": "Polymer/polymer#^0.5"
+  },
+  "devDependencies": {
+    "mat-content": "ExpandJS/mat-content",
+    "mat-demo": "ExpandJS/mat-demo",
+    "mat-menu": "ExpandJS/mat-menu",
+    "mat-option": "ExpandJS/mat-option"
+  }
+}
