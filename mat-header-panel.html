@@ -47,31 +47,27 @@ It should be used in conjunction with mat-header.
                 top: 0;
             }
 
-            :host #matHeaderPanelWrapper {
+            :host #matHeaderPanelWrapper,
+            :host #matHeaderPanelMain {
                 background: transparent;
+                height: 100%;
                 overflow: visible;
             }
 
-            :host #matHeaderPanelMain {
-                height: 100%;
-                -ms-flex-order: 1;
-                order: 1;
-            }
-
-            :host #matHeaderPanelHeader,
             :host #matHeaderPanelBody,
+            :host #matHeaderPanelHeader,
             :host #matHeaderPanelFooter {
                 position: relative;
             }
 
-            :host #matHeaderPanelHeader,
-            :host #matHeaderPanelFooter {
-                z-index: 10;
-            }
-
-            :host #matHeaderPanelFooter {
+            :host #matHeaderPanelBody {
                 -ms-flex-order: 2;
                 order: 2;
+            }
+
+            :host #matHeaderPanelHeader {
+                -ms-flex-order: 1;
+                order: 1;
             }
 
             :host [scroller] {
@@ -79,18 +75,18 @@ It should be used in conjunction with mat-header.
             }
         </style>
         <mat-paper id="matHeaderPanelWrapper" background="{{background}}" vertical layout fit>
-            <div id="matHeaderPanelFooter" hidden?="{{emptyFooter}}">
-                <content id="footerContent" select="[footer]"></content>
-            </div>
             <div id="matHeaderPanelMain" on-scroll="{{handleScroll}}" vertical layout flex>
+                <div id="matHeaderPanelBody" vertical layout flex>
+                    <div id="matHeaderPanelScroller" on-scroll="{{handleScroll}}" flex>
+                        <content id="bodyContent" select=":not([footer]):not([header])"></content>
+                    </div>
+                </div>
                 <div id="matHeaderPanelHeader">
                     <content id="headerContent" select="[header]"></content>
                 </div>
-                <div id="matHeaderPanelBody" vertical layout flex>
-                    <div id="matHeaderPanelScroller" on-scroll="{{handleScroll}}" flex>
-                        <content id="bodyContent"></content>
-                    </div>
-                </div>
+            </div>
+            <div id="matHeaderPanelFooter" hidden?="{{emptyFooter}}">
+                <content id="footerContent" select="[footer]"></content>
             </div>
         </mat-paper>
     </template>
