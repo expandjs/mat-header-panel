@@ -1,7 +1,7 @@
 {
   "name": "mat-header-panel",
   "license": "BSD-3-Clause",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "This element is used to display a material scrollable wrapper with an app bar at the top.",
   "homepage": "http://www.expandjs.com/elements/mat-header-panel",
   "authors": [
