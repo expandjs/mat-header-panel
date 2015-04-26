@@ -121,7 +121,7 @@ It should be used in conjunction with mat-header-panel.
                     scrolled = self.headerPanel ? self.headerPanel.scrolled : 0;
 
                 // Setting
-                self.z = XP.includes(['default', 'fixed'], mode) || (mode === 'waterfall' && scrolled) ? 1 : 0;
+                self.z = (XP.includes(['default', 'waterfall'], mode) && scrolled) || mode === 'fixed' ? 1 : 0;
 
                 return self;
             },
