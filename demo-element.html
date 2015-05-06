@@ -9,22 +9,22 @@
 
     <template>
         <style>
-            :host .container {
+            :host .demo-container {
                 height: 480px;
                 margin: 32px 16px 0 16px;
                 position: relative;
                 width: 320px;
             }
 
-            :host .container::shadow > #matHeaderPanelWrapper {
+            :host .demo-container::shadow > #matHeaderPanelWrapper {
                 border-width: 1px;
             }
 
-            :host .container mat-header::shadow #matHeaderNavButton {
+            :host .demo-container mat-header::shadow #matHeaderNavButton {
                 display: none !important;
             }
 
-            :host .container .main {
+            :host .demo-container .demo-main {
                 background: linear-gradient(#FFA726 0%, #FFF3E0 100%);
                 height: 2000px;
             }
@@ -32,19 +32,19 @@
         <mat-demo label="mat-header-panel">
             <div horizontal layout wrap center-justified>
 
-                <mat-header-panel class="container" background="grey-200">
+                <mat-header-panel class="demo-container" background="grey-200">
                     <mat-header background="indigo">Default</mat-header>
-                    <mat-content class="main">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim vestibulum purus vel pulvinar. Donec cursus malesuada sem eget placerat. Maecenas et lobortis ex. Proin tincidunt, nunc at euismod condimentum, justo est ultrices arcu, non interdum mi sem eget velit. Morbi laoreet, nibh at luctus ornare, enim risus tincidunt sapien, ac hendrerit purus ipsum sed justo. Etiam sagittis dolor neque, vitae congue purus ornare eget. Aenean non enim ex. Sed porta dignissim efficitur. Nullam sagittis justo turpis, dapibus volutpat nulla luctus non. Suspendisse nec sagittis mauris. Suspendisse ut velit quis elit dapibus viverra. Duis eget orci eros. Vivamus scelerisque blandit magna at auctor.</mat-content>
+                    <mat-content class="demo-main">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim vestibulum purus vel pulvinar. Donec cursus malesuada sem eget placerat. Maecenas et lobortis ex. Proin tincidunt, nunc at euismod condimentum, justo est ultrices arcu, non interdum mi sem eget velit. Morbi laoreet, nibh at luctus ornare, enim risus tincidunt sapien, ac hendrerit purus ipsum sed justo. Etiam sagittis dolor neque, vitae congue purus ornare eget. Aenean non enim ex. Sed porta dignissim efficitur. Nullam sagittis justo turpis, dapibus volutpat nulla luctus non. Suspendisse nec sagittis mauris. Suspendisse ut velit quis elit dapibus viverra. Duis eget orci eros. Vivamus scelerisque blandit magna at auctor.</mat-content>
                 </mat-header-panel>
 
-                <mat-header-panel class="container" background="grey-200" mode="fixed">
+                <mat-header-panel class="demo-container" background="grey-200" mode="fixed">
                     <mat-header background="indigo">Fixed</mat-header>
-                    <mat-content class="main">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim vestibulum purus vel pulvinar. Donec cursus malesuada sem eget placerat. Maecenas et lobortis ex. Proin tincidunt, nunc at euismod condimentum, justo est ultrices arcu, non interdum mi sem eget velit. Morbi laoreet, nibh at luctus ornare, enim risus tincidunt sapien, ac hendrerit purus ipsum sed justo. Etiam sagittis dolor neque, vitae congue purus ornare eget. Aenean non enim ex. Sed porta dignissim efficitur. Nullam sagittis justo turpis, dapibus volutpat nulla luctus non. Suspendisse nec sagittis mauris. Suspendisse ut velit quis elit dapibus viverra. Duis eget orci eros. Vivamus scelerisque blandit magna at auctor.</mat-content>
+                    <mat-content class="demo-main">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim vestibulum purus vel pulvinar. Donec cursus malesuada sem eget placerat. Maecenas et lobortis ex. Proin tincidunt, nunc at euismod condimentum, justo est ultrices arcu, non interdum mi sem eget velit. Morbi laoreet, nibh at luctus ornare, enim risus tincidunt sapien, ac hendrerit purus ipsum sed justo. Etiam sagittis dolor neque, vitae congue purus ornare eget. Aenean non enim ex. Sed porta dignissim efficitur. Nullam sagittis justo turpis, dapibus volutpat nulla luctus non. Suspendisse nec sagittis mauris. Suspendisse ut velit quis elit dapibus viverra. Duis eget orci eros. Vivamus scelerisque blandit magna at auctor.</mat-content>
                 </mat-header-panel>
 
-                <mat-header-panel class="container" background="grey-200" mode="seamed">
+                <mat-header-panel class="demo-container" background="grey-200" mode="seamed">
                     <mat-header background="indigo">Seamed with footer</mat-header>
-                    <mat-content class="main">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim vestibulum purus vel pulvinar. Donec cursus malesuada sem eget placerat. Maecenas et lobortis ex. Proin tincidunt, nunc at euismod condimentum, justo est ultrices arcu, non interdum mi sem eget velit. Morbi laoreet, nibh at luctus ornare, enim risus tincidunt sapien, ac hendrerit purus ipsum sed justo. Etiam sagittis dolor neque, vitae congue purus ornare eget. Aenean non enim ex. Sed porta dignissim efficitur. Nullam sagittis justo turpis, dapibus volutpat nulla luctus non. Suspendisse nec sagittis mauris. Suspendisse ut velit quis elit dapibus viverra. Duis eget orci eros. Vivamus scelerisque blandit magna at auctor.</mat-content>
+                    <mat-content class="demo-main">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim vestibulum purus vel pulvinar. Donec cursus malesuada sem eget placerat. Maecenas et lobortis ex. Proin tincidunt, nunc at euismod condimentum, justo est ultrices arcu, non interdum mi sem eget velit. Morbi laoreet, nibh at luctus ornare, enim risus tincidunt sapien, ac hendrerit purus ipsum sed justo. Etiam sagittis dolor neque, vitae congue purus ornare eget. Aenean non enim ex. Sed porta dignissim efficitur. Nullam sagittis justo turpis, dapibus volutpat nulla luctus non. Suspendisse nec sagittis mauris. Suspendisse ut velit quis elit dapibus viverra. Duis eget orci eros. Vivamus scelerisque blandit magna at auctor.</mat-content>
                     <mat-paper footer background="indigo" horizontal layout around-justified>
                         <mat-icon-button icon="content:undo"></mat-icon-button>
                         <mat-icon-button icon="action:home"></mat-icon-button>
@@ -52,12 +52,12 @@
                     </mat-paper>
                 </mat-header-panel>
 
-                <mat-header-panel class="container" background="grey-200" mode="waterfall">
+                <mat-header-panel class="demo-container" background="grey-200" mode="waterfall">
                     <mat-header background="indigo">
                         <div flex>Waterfall with menu</div>
                         <mat-menu-button target="menu"></mat-menu-button>
                     </mat-header>
-                    <mat-content class="main">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim vestibulum purus vel pulvinar. Donec cursus malesuada sem eget placerat. Maecenas et lobortis ex. Proin tincidunt, nunc at euismod condimentum, justo est ultrices arcu, non interdum mi sem eget velit. Morbi laoreet, nibh at luctus ornare, enim risus tincidunt sapien, ac hendrerit purus ipsum sed justo. Etiam sagittis dolor neque, vitae congue purus ornare eget. Aenean non enim ex. Sed porta dignissim efficitur. Nullam sagittis justo turpis, dapibus volutpat nulla luctus non. Suspendisse nec sagittis mauris. Suspendisse ut velit quis elit dapibus viverra. Duis eget orci eros. Vivamus scelerisque blandit magna at auctor.</mat-content>
+                    <mat-content class="demo-main">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim vestibulum purus vel pulvinar. Donec cursus malesuada sem eget placerat. Maecenas et lobortis ex. Proin tincidunt, nunc at euismod condimentum, justo est ultrices arcu, non interdum mi sem eget velit. Morbi laoreet, nibh at luctus ornare, enim risus tincidunt sapien, ac hendrerit purus ipsum sed justo. Etiam sagittis dolor neque, vitae congue purus ornare eget. Aenean non enim ex. Sed porta dignissim efficitur. Nullam sagittis justo turpis, dapibus volutpat nulla luctus non. Suspendisse nec sagittis mauris. Suspendisse ut velit quis elit dapibus viverra. Duis eget orci eros. Vivamus scelerisque blandit magna at auctor.</mat-content>
                     <mat-menu id="menu">
                         <mat-option label="Option 1"></mat-option>
                         <mat-option label="Option 2"></mat-option>
