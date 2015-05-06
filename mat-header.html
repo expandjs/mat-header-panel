@@ -105,6 +105,7 @@ It should be used in conjunction with mat-header-panel.
             }
         </style>
         <mat-paper id="matHeaderWrapper" background="{{background}}" brightness="{{drawer ? '' : 'header'}}" z="{{z}}" vertical layout>
+            <mat-divider id="matHeaderDivider" hidden?="{{z}}" baseline></mat-divider>
             <div id="matHeaderExtended" hidden?="{{emptyExtended}}">
                 <content id="extendedContent" select="[extended]"></content>
             </div>
@@ -113,7 +114,6 @@ It should be used in conjunction with mat-header-panel.
                 <template if="{{drawerPanel && right && drawer}}"><mat-icon-button id="matHeaderHideButton" icon="navigation:close" invokes="hideRight" target="{{drawerPanel}}"></mat-icon-button></template>
                 <content id="content"></content>
             </div>
-            <mat-divider id="matHeaderDivider" hidden?="{{z}}" baseline></mat-divider>
         </mat-paper>
     </template>
 

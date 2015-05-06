@@ -36,6 +36,7 @@
     "mat-content": "ExpandJS/mat-content",
     "mat-demo": "ExpandJS/mat-demo",
     "mat-menu": "ExpandJS/mat-menu",
+    "mat-menu-button": "ExpandJS/mat-menu-button",
     "mat-option": "ExpandJS/mat-option"
   }
 }

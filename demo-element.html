@@ -1,6 +1,7 @@
 <link rel="import" href="../mat-content/mat-content.html">
 <link rel="import" href="../mat-demo/mat-demo.html">
 <link rel="import" href="../mat-menu/mat-menu.html">
+<link rel="import" href="../mat-menu-button/mat-menu-button.html">
 <link rel="import" href="../mat-option/mat-option.html">
 <link rel="import" href="mat-header-panel.html">
 
@@ -19,11 +20,14 @@
                 border-width: 1px;
             }
 
-            :host .main {
+            :host .container mat-header::shadow #matHeaderNavButton {
+                display: none !important;
+            }
+
+            :host .container .main {
                 background: linear-gradient(#FFA726 0%, #FFF3E0 100%);
                 height: 2000px;
             }
-
         </style>
         <mat-demo label="mat-header-panel">
             <div horizontal layout wrap center-justified>
@@ -49,7 +53,10 @@
                 </mat-header-panel>
 
                 <mat-header-panel class="container" background="grey-200" mode="waterfall">
-                    <mat-header background="indigo" menu="menu">Waterfall with menu</mat-header>
+                    <mat-header background="indigo">
+                        <div flex>Waterfall with menu</div>
+                        <mat-menu-button target="menu"></mat-menu-button>
+                    </mat-header>
                     <mat-content class="main">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim vestibulum purus vel pulvinar. Donec cursus malesuada sem eget placerat. Maecenas et lobortis ex. Proin tincidunt, nunc at euismod condimentum, justo est ultrices arcu, non interdum mi sem eget velit. Morbi laoreet, nibh at luctus ornare, enim risus tincidunt sapien, ac hendrerit purus ipsum sed justo. Etiam sagittis dolor neque, vitae congue purus ornare eget. Aenean non enim ex. Sed porta dignissim efficitur. Nullam sagittis justo turpis, dapibus volutpat nulla luctus non. Suspendisse nec sagittis mauris. Suspendisse ut velit quis elit dapibus viverra. Duis eget orci eros. Vivamus scelerisque blandit magna at auctor.</mat-content>
                     <mat-menu id="menu">
                         <mat-option label="Option 1"></mat-option>
