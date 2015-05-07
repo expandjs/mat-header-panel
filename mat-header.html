@@ -111,7 +111,7 @@ It should be used in conjunction with mat-header-panel.
             </div>
             <div id="matHeaderMain" horizontal layout center>
                 <template if="{{drawerPanel && main && !drawerPanel.emptyDrawer}}"><mat-icon-button id="matHeaderNavButton" hidden?="{{!drawerPanel.drawerNarrow}}" icon="navigation:menu" target="{{drawerPanel}}"></mat-icon-button></template>
-                <template if="{{drawerPanel && right && drawer}}"><mat-icon-button id="matHeaderHideButton" icon="navigation:close" invokes="hideRight" target="{{drawerPanel}}"></mat-icon-button></template>
+                <template if="{{drawerPanel && right && drawer}}"><mat-icon-button id="matHeaderHideButton" icon="navigation:close" target="{{drawerPanel}}" on-xp-activate="{{handleRight}}"></mat-icon-button></template>
                 <content id="content"></content>
             </div>
         </mat-paper>
@@ -261,6 +261,13 @@ It should be used in conjunction with mat-header-panel.
                 var self = this;
                 self.emptyExtended = !XP.isContent(self.$.extendedContent, true);
                 XP.onMutation(self, self.mutated.bind(self));
+            },
+            
+            /*********************************************************************/
+
+            // HANDLER
+            handleRight: function () {
+                this.drawerPanel.hideRight();
             }
         });
     </script>
