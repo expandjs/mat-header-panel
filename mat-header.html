@@ -110,8 +110,8 @@ It should be used in conjunction with mat-header-panel.
                 <content id="extendedContent" select="[extended]"></content>
             </div>
             <div id="matHeaderMain" horizontal layout center>
-                <template if="{{drawerPanel && main && !drawerPanel.emptyDrawer}}"><mat-icon-button id="matHeaderNavButton" hidden?="{{!drawerPanel.drawerNarrow}}" icon="navigation:menu" target="{{drawerPanel}}"></mat-icon-button></template>
-                <template if="{{drawerPanel && right && drawer}}"><mat-icon-button id="matHeaderHideButton" icon="navigation:close" target="{{drawerPanel}}" on-xp-activate="{{handleRight}}"></mat-icon-button></template>
+                <template if="{{drawerPanel && main && !drawerPanel.emptyDrawer}}"><mat-icon-button id="matHeaderNavButton" hidden?="{{!drawerPanel.drawerNarrow}}" icon="navigation:menu" on-xp-activate="{{handleLeft}}"></mat-icon-button></template>
+                <template if="{{drawerPanel && right && drawer}}"><mat-icon-button id="matHeaderHideButton" icon="navigation:close" on-xp-activate="{{handleRight}}"></mat-icon-button></template>
                 <content id="content"></content>
             </div>
         </mat-paper>
@@ -264,6 +264,11 @@ It should be used in conjunction with mat-header-panel.
             },
             
             /*********************************************************************/
+
+            // HANDLER
+            handleLeft: function () {
+                this.drawerPanel.toggle();
+            },
 
             // HANDLER
             handleRight: function () {
