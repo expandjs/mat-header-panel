@@ -266,12 +266,14 @@ It should be used in conjunction with mat-header-panel.
             /*********************************************************************/
 
             // HANDLER
-            handleLeft: function () {
-                this.drawerPanel.toggle();
+            handleLeft: function (event) {
+                event.stopPropagation();
+                this.drawerPanel.show();
             },
 
             // HANDLER
-            handleRight: function () {
+            handleRight: function (event) {
+                event.stopPropagation();
                 this.drawerPanel.hideRight();
             }
         });
