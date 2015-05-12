@@ -37,7 +37,7 @@ It should be used in conjunction with mat-header-panel.
 <link rel="import" href="../mat-paper/mat-paper.html">
 <link rel="import" href="../xp-device/xp-device.html">
 
-<polymer-element name="mat-header" constructor="MATHeaderElement" attributes="background emptyExtended">
+<polymer-element name="mat-header" constructor="MATHeaderElement" attributes="background emptyExtended inset">
 
     <template>
         <style>
@@ -81,19 +81,37 @@ It should be used in conjunction with mat-header-panel.
             :host #matHeaderExtended {
                 -ms-flex-order: 2;
                 order: 2;
-                padding: 0 24px 0 80px;
+                padding: 0 24px;
             }
 
             :host-context([mobile]:not([device="tablet"])) #matHeaderExtended {
-                padding: 0 16px 0 72px;
+                padding: 0 16px;
+            }
+
+            :host([inset]) #matHeaderExtended {
+                padding-left: 80px;
+            }
+
+            polyfill-next-selector { content: '[mobile]:not([device="tablet"]) :host([inset]) #matHeaderExtended' }
+            :host-context([mobile]:not([device="tablet"])):host([inset]) #matHeaderExtended {
+                padding-left: 72px;
             }
 
             :host #matHeaderExtended ::content mat-tabs {
-                margin: 0 -24px 0 -80px;
+                margin: 0 -24px;
             }
 
             :host-context([mobile]:not([device="tablet"])) #matHeaderExtended ::content mat-tabs {
-                margin: 0 -16px 0 -72px;
+                margin: 0 -16px;
+            }
+
+            :host([inset]) #matHeaderExtended ::content mat-tabs {
+                margin-left: -80px;
+            }
+
+            polyfill-next-selector { content: '[mobile]:not([device="tablet"]) :host([inset]) #matHeaderExtended ::content mat-tabs' }
+            :host-context([mobile]:not([device="tablet"])):host([inset]) #matHeaderExtended ::content mat-tabs {
+                margin-left: -72px;
             }
 
             :host #matHeaderMain {
@@ -185,7 +203,16 @@ It should be used in conjunction with mat-header-panel.
                  * @default false
                  * @readonly
                  */
-                emptyExtended: {reflect: true, value: false}
+                emptyExtended: {reflect: true, value: false},
+
+                /**
+                 * If set to true, the extended is indented.
+                 *
+                 * @attribute inset
+                 * @type boolean
+                 * @default false
+                 */
+                inset: {reflect: true, value: false}
             },
 
             /**
