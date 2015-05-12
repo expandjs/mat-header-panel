@@ -32,7 +32,7 @@ It should be used in conjunction with mat-header.
 <link rel="import" href="../mat-paper/mat-paper.html">
 <link rel="import" href="mat-header.html">
 
-<polymer-element name="mat-header-panel" constructor="MATHeaderPanelElement" attributes="background drawer emptyFooter main mode right scrolled theme">
+<polymer-element name="mat-header-panel" constructor="MATHeaderPanelElement" attributes="background emptyFooter mode scrolled theme">
 
     <template>
         <style>
@@ -133,15 +133,6 @@ It should be used in conjunction with mat-header.
                 background: {reflect: true, value: ''},
 
                 /**
-                 * If set to true, the element's is into a drawer panel's drawer.
-                 *
-                 * @attribute drawer
-                 * @type boolean
-                 * @default false
-                 */
-                drawer: {reflect: true, value: false},
-
-                /**
                  * If set to true, the footer is is hidden.
                  *
                  * @attribute emptyFooter
@@ -152,15 +143,6 @@ It should be used in conjunction with mat-header.
                 emptyFooter: {reflect: true, value: false},
 
                 /**
-                 * If set to true, the element's is into a drawer panel's main.
-                 *
-                 * @attribute main
-                 * @type boolean
-                 * @default false
-                 */
-                main: {reflect: true, value: false},
-
-                /**
                  * The header panel's scroll mode.
                  *
                  * @attribute mode
@@ -168,15 +150,6 @@ It should be used in conjunction with mat-header.
                  * @default "default"
                  */
                 mode: {reflect: true, value: 'default'},
-
-                /**
-                 * If set to true, the element's is into a drawer panel's right drawer.
-                 *
-                 * @attribute right
-                 * @type boolean
-                 * @default false
-                 */
-                right: {reflect: true, value: false},
 
                 /**
                  * The header panel's scroll amount.

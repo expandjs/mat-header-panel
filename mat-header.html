@@ -69,6 +69,10 @@ It should be used in conjunction with mat-header-panel.
                 width: calc(100% + 36px);
             }
 
+            :host-context([drawer]) #matHeaderWrapper {
+                background: transparent;
+            }
+
             :host-context([mobile]:not([device="tablet"])) #matHeaderWrapper {
                 margin: 0 -4px 0 -16px;
                 width: calc(100% + 20px);
@@ -107,18 +111,17 @@ It should be used in conjunction with mat-header-panel.
                 padding: 0 4px 0 16px;
             }
 
-            :host #matHeaderNavButton {
+            :host #matHeaderNav {
                 margin: 4px 24px 4px -8px;
             }
         </style>
-        <mat-paper id="matHeaderWrapper" background="{{background}}" brightness="{{drawer ? '' : 'header'}}" z="{{z}}" vertical layout>
+        <mat-paper id="matHeaderWrapper" background="{{background}}" brightness="header" z="{{z}}" vertical layout>
             <mat-divider id="matHeaderDivider" hidden?="{{z}}" baseline></mat-divider>
             <div id="matHeaderExtended" hidden?="{{emptyExtended}}">
                 <content id="extendedContent" select="[extended]"></content>
             </div>
             <div id="matHeaderMain" horizontal layout center>
-                <template if="{{drawerPanel && main && !drawerPanel.emptyDrawer}}"><mat-icon-button id="matHeaderNavButton" hidden?="{{!drawerPanel.drawerNarrow}}" icon="navigation:menu" on-xp-activate="{{handleLeft}}"></mat-icon-button></template>
-                <template if="{{drawerPanel && right && drawer}}"><mat-icon-button id="matHeaderHideButton" icon="navigation:close" on-xp-activate="{{handleRight}}"></mat-icon-button></template>
+                <mat-icon-button id="matHeaderNav" hidden?="{{!drawer || !drawer.narrow || drawer.empty}}" icon="navigation:menu" on-xp-activate="{{handleDrawer}}"></mat-icon-button>
                 <content id="content"></content>
             </div>
         </mat-paper>
@@ -138,8 +141,8 @@ It should be used in conjunction with mat-header-panel.
 
                 // Vars
                 var self     = this,
-                    mode     = self.headerPanel ? self.headerPanel.mode : 'default',
-                    scrolled = self.headerPanel ? self.headerPanel.scrolled : 0;
+                    mode     = self.panel ? self.panel.mode : 'default',
+                    scrolled = self.panel ? self.panel.scrolled : 0;
 
                 // Setting
                 self.z = (XP.includes(['default', 'waterfall'], mode) && scrolled) || mode === 'fixed' ? 1 : 0;
@@ -151,7 +154,7 @@ It should be used in conjunction with mat-header-panel.
 
             // OBSERVE
             observe: {
-                'headerPanel.mode headerPanel.scrolled': 'refresh'
+                'panel.mode panel.scrolled': 'refresh'
             },
 
             // PUBLISH
@@ -167,6 +170,14 @@ It should be used in conjunction with mat-header-panel.
                 background: {reflect: true, value: ''},
 
                 /**
+                 * The navigation drawer.
+                 *
+                 * @attribute drawer
+                 * @type Element
+                 */
+                drawer: {reflect: false, value: null},
+
+                /**
                  * If set to true, the extended is hidden.
                  *
                  * @attribute emptyExtended
@@ -178,52 +189,13 @@ It should be used in conjunction with mat-header-panel.
             },
 
             /**
-             * If set to true, the element's is into a drawer panel's drawer.
+             * The parent panel.
              *
-             * @attribute drawer
-             * @type boolean
-             * @default false
-             * @readonly
-             */
-            drawer: false,
-
-            /**
-             * The parent drawer panel.
-             *
-             * @attribute drawerPanel
+             * @property panel
              * @type Element
              * @readonly
              */
-            drawerPanel: null,
-
-            /**
-             * The parent header panel.
-             *
-             * @attribute headerPanel
-             * @type Element
-             * @readonly
-             */
-            headerPanel: null,
-
-            /**
-             * If set to true, the element's is into a drawer panel's main.
-             *
-             * @attribute main
-             * @type boolean
-             * @default false
-             * @readonly
-             */
-            main: false,
-
-            /**
-             * If set to true, the element's is into a drawer panel's right drawer.
-             *
-             * @attribute right
-             * @type boolean
-             * @default false
-             * @readonly
-             */
-            right: false,
+            panel: null,
 
             /**
              * The paper's z-axis position.
@@ -240,11 +212,7 @@ It should be used in conjunction with mat-header-panel.
             // LISTENER
             attached: function () {
                 var self = this;
-                self.drawer      = XP.isElement(XP.findParentElement(self, '[drawer]'));
-                self.drawerPanel = XP.findParentElement(self, 'mat-drawer-panel');
-                self.headerPanel = XP.findParentElement(self, 'mat-header-panel');
-                self.main        = XP.isElement(XP.findParentElement(self, '[main]'));
-                self.right       = self.drawer && XP.matches(XP.findParentElement(self, '[drawer]'), '[right]');
+                self.panel = XP.findParentElement(self, 'mat-header-panel');
                 self.mutated();
             },
 
@@ -255,12 +223,7 @@ It should be used in conjunction with mat-header-panel.
 
             // LISTENER
             detached: function () {
-                var self = this;
-                self.drawer      = false;
-                self.drawerPanel = null;
-                self.headerPanel = null;
-                self.main        = false;
-                self.right       = false;
+                this.panel = null;
             },
 
             // LISTENER
@@ -273,15 +236,9 @@ It should be used in conjunction with mat-header-panel.
             /*********************************************************************/
 
             // HANDLER
-            handleLeft: function (event) {
+            handleDrawer: function (event) {
                 event.stopPropagation();
-                this.drawerPanel.show();
-            },
-
-            // HANDLER
-            handleRight: function (event) {
-                event.stopPropagation();
-                this.drawerPanel.hideRight();
+                this.drawer.show();
             }
         });
     </script>
