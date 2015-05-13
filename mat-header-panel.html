@@ -38,14 +38,19 @@ It should be used in conjunction with mat-header.
         <style>
             :host {
                 display: block;
-                height: 100%;
                 overflow: visible;
                 text-align: left;
+
+                /* FIT */
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                right: 0;
+                top: 0;
             }
 
             :host #matHeaderPanelWrapper {
                 background: transparent;
-                height: 100%;
             }
 
             :host #matHeaderPanelMain {
@@ -73,7 +78,7 @@ It should be used in conjunction with mat-header.
                 overflow-y: auto;
             }
         </style>
-        <mat-paper id="matHeaderPanelWrapper" background="{{background}}" vertical layout>
+        <mat-paper id="matHeaderPanelWrapper" background="{{background}}" vertical layout fit>
             <div id="matHeaderPanelFooter" hidden?="{{emptyFooter}}">
                 <content id="footerContent" select="[footer]"></content>
             </div>
