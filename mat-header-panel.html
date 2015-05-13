@@ -32,7 +32,7 @@ It should be used in conjunction with mat-header.
 <link rel="import" href="../mat-paper/mat-paper.html">
 <link rel="import" href="mat-header.html">
 
-<polymer-element name="mat-header-panel" constructor="MATHeaderPanelElement" attributes="background emptyFooter mode scrolled theme">
+<polymer-element name="mat-header-panel" constructor="MATHeaderPanelElement" attributes="background emptyFooter mode raised scrolled theme">
 
     <template>
         <style>
@@ -78,7 +78,7 @@ It should be used in conjunction with mat-header.
                 overflow-y: auto;
             }
         </style>
-        <mat-paper id="matHeaderPanelWrapper" background="{{background}}" vertical layout fit>
+        <mat-paper id="matHeaderPanelWrapper" background="{{background}}" z="{{raised ? 1 : 0}}" vertical layout fit>
             <div id="matHeaderPanelFooter" hidden?="{{emptyFooter}}">
                 <content id="footerContent" select="[footer]"></content>
             </div>
@@ -149,6 +149,15 @@ It should be used in conjunction with mat-header.
                  * @default "default"
                  */
                 mode: {reflect: true, value: 'default'},
+
+                /**
+                 * If set to true, the panel is raised.
+                 *
+                 * @attribute raised
+                 * @type boolean
+                 * @default false
+                 */
+                raised: {reflect: true, value: false},
 
                 /**
                  * The header panel's scroll amount.
