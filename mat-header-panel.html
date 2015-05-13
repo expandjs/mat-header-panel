@@ -38,20 +38,14 @@ It should be used in conjunction with mat-header.
         <style>
             :host {
                 display: block;
+                height: 100%;
                 overflow: visible;
                 text-align: left;
-
-                /* FIT */
-                bottom: 0;
-                left: 0;
-                position: absolute;
-                right: 0;
-                top: 0;
             }
 
             :host #matHeaderPanelWrapper {
                 background: transparent;
-                overflow: visible;
+                height: 100%;
             }
 
             :host #matHeaderPanelMain {
@@ -79,7 +73,7 @@ It should be used in conjunction with mat-header.
                 overflow-y: auto;
             }
         </style>
-        <mat-paper id="matHeaderPanelWrapper" background="{{background}}" vertical layout fit>
+        <mat-paper id="matHeaderPanelWrapper" background="{{background}}" vertical layout>
             <div id="matHeaderPanelFooter" hidden?="{{emptyFooter}}">
                 <content id="footerContent" select="[footer]"></content>
             </div>
@@ -159,7 +153,16 @@ It should be used in conjunction with mat-header.
                  * @default 0
                  * @readonly
                  */
-                scrolled: {reflect: false, value: 0}
+                scrolled: {reflect: false, value: 0},
+
+                /**
+                 * The header panel's scrolling element.
+                 *
+                 * @attribute scroller
+                 * @type Element
+                 * @readonly
+                 */
+                scroller: {reflect: false, value: null}
             },
 
             /**
@@ -171,15 +174,6 @@ It should be used in conjunction with mat-header.
              * @readonly
              */
             modes: ['default', 'fixed', 'seamed', 'waterfall'],
-
-            /**
-             * The header panel's scrolling element.
-             *
-             * @property scroller
-             * @type Element
-             * @readonly
-             */
-            scroller: null,
 
             /*********************************************************************/
 
