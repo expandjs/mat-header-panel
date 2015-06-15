@@ -25,18 +25,18 @@
     "**/.*"
   ],
   "dependencies": {
-    "expandjs": "ExpandJS/expandjs",
-    "mat-divider": "ExpandJS/mat-divider",
-    "mat-icon-button": "ExpandJS/mat-icon-button",
-    "mat-paper": "ExpandJS/mat-paper",
-    "xp-device": "ExpandJS/xp-device",
+    "expandjs": "ExpandJS/expandjs#alpha",
+    "mat-divider": "ExpandJS/mat-divider#alpha",
+    "mat-icon-button": "ExpandJS/mat-icon-button#alpha",
+    "mat-paper": "ExpandJS/mat-paper#alpha",
+    "xp-device": "ExpandJS/xp-device#alpha",
     "polymer": "Polymer/polymer#^0.5"
   },
   "devDependencies": {
-    "mat-content": "ExpandJS/mat-content",
-    "mat-demo": "ExpandJS/mat-demo",
-    "mat-menu": "ExpandJS/mat-menu",
-    "mat-menu-button": "ExpandJS/mat-menu-button",
-    "mat-option": "ExpandJS/mat-option"
+    "mat-content": "ExpandJS/mat-content#alpha",
+    "mat-demo": "ExpandJS/mat-demo#alpha",
+    "mat-menu": "ExpandJS/mat-menu#alpha",
+    "mat-menu-button": "ExpandJS/mat-menu-button#alpha",
+    "mat-option": "ExpandJS/mat-option#alpha"
   }
 }
