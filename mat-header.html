@@ -1,0 +1,387 @@
+<!--
+@license
+Copyright (c) 2015 The ExpandJS authors. All rights reserved.
+This code may only be used under the BSD style license found at https://expandjs.github.io/LICENSE.txt
+The complete set of authors may be found at https://expandjs.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://expandjs.github.io/CONTRIBUTORS.txt
+-->
+
+<!--
+This element is used to display a material app bar.
+It should be used in conjunction with mat-header-panel.
+
+@element mat-header
+@description A custom element used to display a Material Design app bar
+@keywords material design, material header, material app bar, web app, html5, expandjs, web-components
+@group containers
+@homepage http://expandjs.com/elements/mat-header
+@demo http://expandjs.com/demo/mat-header-panel
+
+@dependency polymer Polymer/polymer
+@dependency expandjs ExpandJS/expandjs
+@dependency iron-flex-layout PolymerElements/iron-flex-layout
+@dependency mat-divider ExpandJS/mat-divider
+@dependency mat-icon-button ExpandJS/mat-icon-button
+@dependency mat-icons ExpandJS/mat-icons
+@dependency mat-paper ExpandJS/mat-paper
+
+@devDependency mat-content ExpandJS/mat-content
+@devDependency mat-demo ExpandJS/mat-demo
+@devDependency mat-menu ExpandJS/mat-menu
+@devDependency mat-menu-button ExpandJS/mat-menu-button
+@devDependency mat-option ExpandJS/mat-option
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../expandjs/expandjs.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../mat-divider/mat-divider.html">
+<link rel="import" href="../mat-icon-button/mat-icon-button.html">
+<link rel="import" href="../mat-icons/navigation-icons.html">
+<link rel="import" href="../mat-paper/mat-paper.html">
+
+<style>
+    html [drawer=""] mat-header #matHeaderWrapper {
+        background: transparent;
+    }
+</style>
+
+<dom-module id="mat-header">
+
+    <style>
+        :host {
+            @apply(--mat-font-headline);
+            display: block;
+            line-height: 32px !important; /* override */
+            min-height: 56px;
+            padding: 0 4px 0 16px;
+            overflow: visible;
+            position: relative;
+            text-align: left;
+        }
+
+        :host #matHeaderWrapper {
+            @apply(--layout-vertical);
+            border-radius: inherit;
+            margin: 0 -4px 0 -16px;
+            overflow: visible;
+            width: calc(100% + 20px);
+        }
+
+        :host([z="0"]) #matHeaderDivider {
+            display: none !important;
+        }
+
+        :host #matHeaderExtended {
+            -ms-flex-order: 2;
+            -webkit-order: 2;
+            order: 2;
+            padding: 0 16px;
+        }
+
+        :host([emptyExtended]) #matHeaderExtended {
+            display: none !important;
+        }
+
+        :host([inset]) #matHeaderExtended {
+            padding-left: 72px;
+        }
+
+        :host #matHeaderExtended ::content mat-tabs {
+            margin: 0 -24px;
+        }
+
+        :host([inset]) #matHeaderExtended ::content mat-tabs {
+            margin-left: -72px;
+        }
+
+        :host #matHeaderMain {
+            @apply(--layout-horizontal);
+            @apply(--layout-center);
+            height: 56px;
+            -ms-flex-order: 1;
+            -webkit-order: 1;
+            order: 1;
+            overflow: hidden;
+            padding: 0 4px 0 16px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        :host #matHeaderNav {
+            margin: 4px 24px 4px -8px;
+        }
+
+        /* TABLET */
+
+        @media (min-width: 960px) {
+
+            :host {
+                min-height: 64px;
+                padding: 0 12px 0 24px;
+            }
+
+            :host #matHeaderWrapper {
+                margin: 0 -12px 0 -24px;
+                width: calc(100% + 36px);
+            }
+
+            :host #matHeaderExtended {
+                padding: 0 24px;
+            }
+
+            :host([inset]) #matHeaderExtended {
+                padding-left: 80px;
+            }
+
+            :host #matHeaderExtended ::content mat-tabs {
+                margin: 0 -16px;
+            }
+
+            :host([inset]) #matHeaderExtended ::content mat-tabs {
+                margin-left: -80px;
+            }
+
+            :host #matHeaderMain {
+                height: 64px;
+                padding: 0 12px 0 24px;
+            }
+
+            :host(:not([nav])) #matHeaderNav {
+                display: none !important;
+            }
+        }
+    </style>
+
+    <template>
+        <mat-paper id="matHeaderWrapper" background="[[background]]" brightness="header" z="[[z]]">
+            <mat-divider id="matHeaderDivider" baseline></mat-divider>
+            <div id="matHeaderExtended">
+                <content id="extendedContent" select="[extended]"></content>
+            </div>
+            <div id="matHeaderMain">
+                <mat-icon-button id="matHeaderNav" icon="navigation:menu" on-xp-activate="_handleNav"></mat-icon-button>
+                <content id="content"></content>
+            </div>
+        </mat-paper>
+    </template>
+
+    <script>
+        Polymer({
+
+            // ELEMENT
+            is: 'mat-header',
+
+            /*********************************************************************/
+
+            /**
+             * Refreshes the element.
+             *
+             * @method _refresh
+             * @returns {Element}
+             * @private
+             */
+            _refresh: function () {
+
+                // Vars
+                var self     = this,
+                    mode     = self.panel ? self.panel.mode : 'default',
+                    scrolled = self.panel ? self.panel.scrolled : 0;
+
+                // Setting
+                self._setZ(mode === 'fixed' || (scrolled && (mode === 'default' || mode === 'waterfall')) ? 4 : 0);
+
+                return self;
+            },
+
+            /*********************************************************************/
+
+            // ATTRIBUTES
+            hostAttributes: {
+                'header': true
+            },
+
+            // PROPERTIES
+            properties: {
+
+                /**
+                 * The paper's background color.
+                 *
+                 * @attribute background
+                 * @type string
+                 */
+                background: {
+                    reflectToAttribute: true,
+                    type: String,
+                    value: null
+                },
+
+                /**
+                 * The navigation drawer.
+                 *
+                 * @attribute drawer
+                 * @type Element
+                 */
+                drawer: {
+                    observer: '_drawerChanged',
+                    value: null
+                },
+
+                /**
+                 * If set to true, the extended is hidden.
+                 *
+                 * @attribute empty-extended
+                 * @type boolean
+                 * @default false
+                 * @notifies
+                 * @readonly
+                 */
+                emptyExtended: {
+                    notify: true,
+                    readOnly: true,
+                    reflectToAttribute: true,
+                    type: Boolean,
+                    value: false
+                },
+
+                /**
+                 * If set to true, the extended is indented.
+                 *
+                 * @attribute inset
+                 * @type boolean
+                 * @default false
+                 */
+                inset: {
+                    reflectToAttribute: true,
+                    type: Boolean,
+                    value: false
+                },
+
+                /**
+                 * The parent panel.
+                 *
+                 * @property panel
+                 * @type Element
+                 * @notifies
+                 * @readonly
+                 */
+                panel: {
+                    notify: true,
+                    observer: '_panelChanged',
+                    readOnly: true,
+                    value: null
+                },
+
+                /**
+                 * If set to true, the nav is showed.
+                 *
+                 * @attribute nav
+                 * @type boolean
+                 * @default false
+                 * @notifies
+                 * @readonly
+                 */
+                nav: {
+                    notify: true,
+                    readOnly: true,
+                    reflectToAttribute: true,
+                    type: Boolean,
+                    value: false
+                },
+
+                /**
+                 * The paper's z-axis position.
+                 *
+                 * @attribute z
+                 * @type number
+                 * @default 0
+                 * @notifies
+                 * @readonly
+                 */
+                z: {
+                    notify: true,
+                    readOnly: true,
+                    reflectToAttribute: true,
+                    type: Number,
+                    value: 0
+                }
+            },
+
+            /*********************************************************************/
+
+            // OBSERVER
+            _drawerChanged: function (post, pre) {
+
+                // Vars
+                var self;
+
+                // Checking
+                if (arguments.length < 2) { return; }
+
+                // Listening
+                if (pre) { self.unlisten(pre, 'empty-changed', '_handleDrawer'); self.unlisten(pre, 'narrow-changed', '_handleDrawer'); }
+                if (post) { self.listen(post, 'empty-changed', '_handleDrawer'); self.listen(post, 'narrow-changed', '_handleDrawer'); }
+
+                // Handling
+                self._handleDrawer();
+            },
+
+            // OBSERVER
+            _panelChanged: function (post, pre) {
+
+                // Vars
+                var self;
+
+                // Checking
+                if (arguments.length < 2) { return; }
+
+                // Listening
+                if (pre) { self.unlisten(pre, 'mode-changed', '_handlePanel'); self.unlisten(pre, 'scrolled-changed', '_handlePanel'); }
+                if (post) { self.listen(post, 'mode-changed', '_handlePanel'); self.listen(post, 'scrolled-changed', '_handlePanel'); }
+
+                // Handling
+                self._handlePanel();
+            },
+
+            /*********************************************************************/
+
+            // LISTENER
+            attached: function () {
+                var self = this;
+                self._setPanel(XP.findParentElement(Polymer.dom(self), 'mat-header-panel'));
+                self.mutated();
+            },
+
+            // LISTENER
+            detached: function () {
+                this._setPanel(null);
+            },
+
+            // LISTENER
+            mutated: function () {
+                var self = this;
+                self._setEmptyExtended(!XP.isContent(Polymer.dom(self.$.extendedContent), true));
+                XP.onMutation(self, self.mutated.bind(self));
+            },
+
+            /*********************************************************************/
+
+            // HANDLER
+            _handleDrawer: function () {
+                this._setNav(!!this.drawer && this.drawer.narrow && !this.drawer.empty);
+            },
+
+            // HANDLER
+            _handleNav: function (event) {
+                event.stopPropagation();
+                this.drawer.show();
+            },
+
+            // HANDLER
+            _handlePanel: function () {
+                this._refresh();
+            }
+        });
+    </script>
+
+</dom-module>

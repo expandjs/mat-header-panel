@@ -1,0 +1,307 @@
+<!--
+@license
+Copyright (c) 2015 The ExpandJS authors. All rights reserved.
+This code may only be used under the BSD style license found at https://expandjs.github.io/LICENSE.txt
+The complete set of authors may be found at https://expandjs.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://expandjs.github.io/CONTRIBUTORS.txt
+-->
+
+<!--
+This element is used to display a material scrollable wrapper with an app bar at the top.
+It should be used in conjunction with mat-header.
+
+@element mat-header-panel
+@description A custom element used to display a Material Design container with an app bar at the top
+@keywords material design, material header panel, web app, html5, expandjs, web-components
+@group containers
+@homepage http://expandjs.com/elements/mat-header-panel
+@demo http://expandjs.com/demo/mat-header-panel
+
+@dependency polymer Polymer/polymer
+@dependency expandjs ExpandJS/expandjs
+@dependency mat-paper ExpandJS/mat-paper
+
+@devDependency mat-content ExpandJS/mat-content
+@devDependency mat-demo ExpandJS/mat-demo
+@devDependency mat-icons ExpandJS/mat-icons
+@devDependency mat-menu ExpandJS/mat-menu
+@devDependency mat-menu-button ExpandJS/mat-menu-button
+@devDependency mat-option ExpandJS/mat-option
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../expandjs/expandjs.html">
+<link rel="import" href="../iron-flex-layout/iton-flex-layout.html">
+<link rel="import" href="../mat-paper/mat-paper.html">
+<link rel="import" href="mat-header.html">
+
+<dom-module id="mat-header-panel">
+
+    <style>
+        :host {
+            @apply(--layout-fit);
+            display: block;
+            overflow: visible;
+            text-align: left;
+        }
+
+        :host #matHeaderPanelWrapper {
+            @apply(--layout-vertical);
+            @apply(--layout-fit);
+            background: transparent;
+        }
+
+        :host #matHeaderPanelMain {
+            @apply(--layout-vertical);
+            @apply(--layout-flex);
+            -ms-flex-order: 1;
+            -webkit-order: 1;
+            order: 1;
+        }
+
+        :host #matHeaderPanelFooter,
+        :host #matHeaderPanelHeader,
+        :host #matHeaderPanelBody {
+            position: relative;
+        }
+
+        :host #matHeaderPanelFooter,
+        :host #matHeaderPanelHeader {
+            z-index: 1;
+        }
+
+        :host #matHeaderPanelFooter {
+            -ms-flex-order: 2;
+            -webkit-order: 2;
+            order: 2;
+        }
+
+        :host([emptyFooter]) #matHeaderPanelFooter {
+            display: none !important;
+        }
+
+        :host #matHeaderPanelBody {
+            @apply(--layout-vertical);
+            @apply(--layout-flex);
+        }
+
+        :host #matHeaderPanelScroller {
+            @apply(--layout-flex);
+        }
+
+        :host [scroller] {
+            overflow-y: auto;
+        }
+    </style>
+
+    <template>
+        <mat-paper id="matHeaderPanelWrapper" background="[[background]]" z="[[_computeZ(raised)]]">
+            <div id="matHeaderPanelFooter">
+                <content id="footerContent" select="[footer]"></content>
+            </div>
+            <div id="matHeaderPanelMain" on-scroll="_handleScroll">
+                <div id="matHeaderPanelHeader">
+                    <content id="headerContent" select="[header]"></content>
+                </div>
+                <div id="matHeaderPanelBody">
+                    <div id="matHeaderPanelScroller" on-scroll="_handleScroll">
+                        <content id="bodyContent"></content>
+                    </div>
+                </div>
+            </div>
+        </mat-paper>
+    </template>
+
+    <script>
+        Polymer({
+
+            // ELEMENT
+            is: 'mat-header-panel',
+
+            /*********************************************************************/
+
+            /**
+             * Refreshes the element.
+             *
+             * @method _refresh
+             * @returns {Element}
+             * @private
+             */
+            _refresh: function () {
+
+                // Vars
+                var self = this;
+
+                // Setting
+                self._setScroller(self.$[XP.includes(['fixed', 'waterfall'], self.mode) ? 'matHeaderPanelScroller' : 'matHeaderPanelMain']);
+
+                // Styling
+                XP.setStyle(self.$.matHeaderPanelHeader, 'top', 0);
+
+                return self;
+            },
+
+            /*********************************************************************/
+
+            // OBSERVERS
+            observers: [
+                '_refresh(mode)'
+            ],
+
+            // PROPERTIES
+            properties: {
+
+                /**
+                 * The paper's background color.
+                 *
+                 * @attribute background
+                 * @type string
+                 */
+                background: {
+                    reflectToAttribute: true,
+                    type: String,
+                    value: null
+                },
+
+                /**
+                 * If set to true, the footer is is hidden.
+                 *
+                 * @attribute empty-footer
+                 * @type boolean
+                 * @default false
+                 * @notifies
+                 * @readonly
+                 */
+                emptyFooter: {
+                    notify: true,
+                    readOnly: true,
+                    reflectToAttribute: true,
+                    type: Boolean,
+                    value: false
+                },
+
+                /**
+                 * The header panel's scroll mode.
+                 *
+                 * @attribute mode
+                 * @type string
+                 * @default "default"
+                 * @notifies
+                 */
+                mode: {
+                    notify: true,
+                    reflectToAttribute: true,
+                    type: String,
+                    value: 'default'
+                },
+
+                /**
+                 * If set to true, the panel is raised.
+                 *
+                 * @attribute raised
+                 * @type boolean
+                 * @default false
+                 */
+                raised: {
+                    reflectToAttribute: true,
+                    type: Boolean,
+                    value: false
+                },
+
+                /**
+                 * The header panel's scroll amount.
+                 *
+                 * @attribute scrolled
+                 * @type number
+                 * @default 0
+                 * @notifies
+                 * @readonly
+                 */
+                scrolled: {
+                    notify: true,
+                    readOnly: true,
+                    type: Number,
+                    value: 0
+                },
+
+                /**
+                 * The header panel's scrolling element.
+                 *
+                 * @attribute scroller
+                 * @type Element
+                 * @notifies
+                 * @readonly
+                 */
+                scroller: {
+                    notify: true,
+                    observer: '_scrollerChanged',
+                    readOnly: true,
+                    value: null
+                }
+            },
+
+            /**
+             * The list of scroll modes.
+             *
+             * @property modes
+             * @type Array
+             * @default ["default", "fixed", "seamed", "waterfall"]
+             * @readonly
+             */
+            modes: ['default', 'fixed', 'seamed', 'waterfall'],
+
+            /*********************************************************************/
+
+            // COMPUTER
+            _computeZ: function (raised) {
+                return raised ? 2 : 0;
+            },
+
+            /*********************************************************************/
+
+            // OBSERVER
+            _scrollerChanged: function (post, pre) {
+                if (arguments.length < 2) { return; }
+                if (pre) { XP.removeAttribute(pre, 'scroller'); }
+                if (post) { XP.addAttribute(post, 'scroller'); }
+            },
+
+            /*********************************************************************/
+
+            // LISTENER
+            attached: function () {
+                this.mutated();
+            },
+
+            // LISTENER
+            mutated: function () {
+                var self = this;
+                self._setEmptyFooter(!XP.isContent(Polymer.dom(self.$.footerContent), true));
+                XP.onMutation(self, self.mutated.bind(self));
+            },
+
+            /*********************************************************************/
+
+            // HANDLER
+            _handleScroll: function () {
+
+                // Vars
+                var self     = this,
+                    header   = self.$.matHeaderPanelHeader,
+                    scrolled = self.scroller.scrollTop;
+
+                // Stylizing
+                switch (self.mode) {
+                case 'default':
+                    if (self.scrolled <= scrolled) { break; }
+                    XP.setStyle(header, 'top', scrolled + 'px');
+                    break;
+                }
+
+                // Setting
+                self._setScrolled(scrolled);
+            }
+        });
+    </script>
+
+</dom-module>
