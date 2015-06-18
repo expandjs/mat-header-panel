@@ -112,6 +112,10 @@ It should be used in conjunction with mat-header-panel.
             margin: 4px 24px 4px -8px;
         }
 
+        :host(:not([nav])) #matHeaderNav {
+            display: none !important;
+        }
+
         /* TABLET */
 
         @media (min-width: 960px) {
@@ -145,10 +149,6 @@ It should be used in conjunction with mat-header-panel.
             :host #matHeaderMain {
                 height: 64px;
                 padding: 0 12px 0 24px;
-            }
-
-            :host(:not([nav])) #matHeaderNav {
-                display: none !important;
             }
         }
     </style>
