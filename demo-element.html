@@ -5,6 +5,7 @@
 <link rel="import" href="../mat-menu/mat-menu.html">
 <link rel="import" href="../mat-menu-button/mat-menu-button.html">
 <link rel="import" href="../mat-option/mat-option.html">
+<link rel="import" href="../mat-toolbar/mat-toolbar.html">
 <link rel="import" href="mat-header-panel.html">
 
 <dom-module id="mat-header-panel-demo">
@@ -21,11 +22,6 @@
 
         :host mat-header-panel .demo-main {
             background: linear-gradient(#FFFFFF 0%, #B0FFDA 100%);
-        }
-
-        :host mat-header-panel [footer] {
-            @apply(--layout-horizontal);
-            @apply(--layout-around-justified);
         }
     </style>
 
@@ -92,11 +88,11 @@
                         <div>Pellentesque a mollis massa. Donec sollicitudin nibh iaculis placerat elementum. Nam ac sollicitudin orci. Nunc suscipit non urna id pellentesque. Duis sed risus tellus. In hac habitasse platea dictumst. Sed viverra sodales libero, ut volutpat massa ultrices id. Integer quis nisl in tortor blandit blandit. Sed feugiat, ante eu rutrum molestie, mauris justo consequat eros, a finibus enim felis eu est. Nam eget pharetra ipsum. Maecenas sagittis turpis ultricies lectus placerat dignissim. Maecenas eu ultricies neque. Aliquam vulputate, magna non lacinia tempor, ante libero congue nunc, eget dapibus nisl ante vitae neque.</div><br/>
                         <div>Maecenas imperdiet metus sed facilisis convallis. Nullam ligula elit, tincidunt non viverra quis, malesuada et nibh. Vestibulum vitae ultricies enim, et tempus ex. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque eget metus magna. Sed justo metus, lobortis a consequat id, sagittis sit amet tortor. In nec sem tempor, scelerisque odio quis, convallis velit. Aliquam eu nisi porttitor, ullamcorper augue aliquam, ornare magna. Cras dapibus blandit enim in egestas. Nullam condimentum, ligula ac accumsan tristique, nisi lorem efficitur nibh, in gravida ex orci nec est. Vivamus congue molestie metus, et luctus enim tincidunt in.</div><br/>
                     </mat-content>
-                    <mat-paper footer background="indigo">
+                    <mat-toolbar background="grey-300" justified footer>
                         <mat-icon-button icon="content:undo"></mat-icon-button>
                         <mat-icon-button icon="action:home"></mat-icon-button>
                         <mat-icon-button icon="content:send"></mat-icon-button>
-                    </mat-paper>
+                    </mat-toolbar>
                 </mat-header-panel>
             </script>
             <mat-header-panel class="demo-container" background="grey-200" mode="seamed">
@@ -108,11 +104,11 @@
                     <div>Pellentesque a mollis massa. Donec sollicitudin nibh iaculis placerat elementum. Nam ac sollicitudin orci. Nunc suscipit non urna id pellentesque. Duis sed risus tellus. In hac habitasse platea dictumst. Sed viverra sodales libero, ut volutpat massa ultrices id. Integer quis nisl in tortor blandit blandit. Sed feugiat, ante eu rutrum molestie, mauris justo consequat eros, a finibus enim felis eu est. Nam eget pharetra ipsum. Maecenas sagittis turpis ultricies lectus placerat dignissim. Maecenas eu ultricies neque. Aliquam vulputate, magna non lacinia tempor, ante libero congue nunc, eget dapibus nisl ante vitae neque.</div><br/>
                     <div>Maecenas imperdiet metus sed facilisis convallis. Nullam ligula elit, tincidunt non viverra quis, malesuada et nibh. Vestibulum vitae ultricies enim, et tempus ex. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque eget metus magna. Sed justo metus, lobortis a consequat id, sagittis sit amet tortor. In nec sem tempor, scelerisque odio quis, convallis velit. Aliquam eu nisi porttitor, ullamcorper augue aliquam, ornare magna. Cras dapibus blandit enim in egestas. Nullam condimentum, ligula ac accumsan tristique, nisi lorem efficitur nibh, in gravida ex orci nec est. Vivamus congue molestie metus, et luctus enim tincidunt in.</div><br/>
                 </mat-content>
-                <mat-paper footer background="indigo">
+                <mat-toolbar background="grey-300" justified footer>
                     <mat-icon-button icon="content:undo"></mat-icon-button>
                     <mat-icon-button icon="action:home"></mat-icon-button>
                     <mat-icon-button icon="content:send"></mat-icon-button>
-                </mat-paper>
+                </mat-toolbar>
             </mat-header-panel>
         </mat-demo>
 

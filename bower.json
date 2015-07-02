@@ -39,6 +39,7 @@
     "mat-icons": "ExpandJS/mat-icons#0.9.3",
     "mat-menu": "ExpandJS/mat-menu#0.9.3",
     "mat-menu-button": "ExpandJS/mat-menu-button#0.9.3",
-    "mat-option": "ExpandJS/mat-option#0.9.3"
+    "mat-option": "ExpandJS/mat-option#0.9.3",
+    "mat-toolbar": "ExpandJS/mat-toolbar#0.9.3"
   }
 }
