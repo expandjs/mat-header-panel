@@ -18,17 +18,17 @@ It should be used in conjunction with mat-header.
 @demo http://expandjs.com/demo/mat-header-panel
 
 @dependency polymer Polymer/polymer#^1.0.0
-@dependency expandjs ExpandJS/expandjs#0.9.3
+@dependency expandjs ExpandJS/expandjs#0.9.4
 @dependency iron-flex-layout PolymerElements/iron-flex-layout#^1.0.0
-@dependency mat-paper ExpandJS/mat-paper#0.9.3
+@dependency mat-paper ExpandJS/mat-paper#0.9.4
 
-@devDependency mat-content ExpandJS/mat-content#0.9.3
-@devDependency mat-demo ExpandJS/mat-demo#0.9.3
-@devDependency mat-icons ExpandJS/mat-icons#0.9.3
-@devDependency mat-menu ExpandJS/mat-menu#0.9.3
-@devDependency mat-menu-button ExpandJS/mat-menu-button#0.9.3
-@devDependency mat-option ExpandJS/mat-option#0.9.3
-@devDependency mat-toolbar ExpandJS/mat-toolbar#0.9.3
+@devDependency mat-content ExpandJS/mat-content#0.9.4
+@devDependency mat-demo ExpandJS/mat-demo#0.9.4
+@devDependency mat-icons ExpandJS/mat-icons#0.9.4
+@devDependency mat-menu ExpandJS/mat-menu#0.9.4
+@devDependency mat-menu-button ExpandJS/mat-menu-button#0.9.4
+@devDependency mat-option ExpandJS/mat-option#0.9.4
+@devDependency mat-toolbar ExpandJS/mat-toolbar#0.9.4
 -->
 
 <link rel="import" href="../polymer/polymer.html">
@@ -56,9 +56,6 @@ It should be used in conjunction with mat-header.
         :host #matHeaderPanelMain {
             @apply(--layout-vertical);
             @apply(--layout-flex);
-            -ms-flex-order: 1;
-            -webkit-order: 1;
-            order: 1;
         }
 
         :host #matHeaderPanelFooter,
@@ -70,12 +67,6 @@ It should be used in conjunction with mat-header.
         :host #matHeaderPanelFooter,
         :host #matHeaderPanelHeader {
             z-index: 1;
-        }
-
-        :host #matHeaderPanelFooter {
-            -ms-flex-order: 2;
-            -webkit-order: 2;
-            order: 2;
         }
 
         :host([emptyFooter]) #matHeaderPanelFooter {
@@ -98,18 +89,18 @@ It should be used in conjunction with mat-header.
 
     <template>
         <mat-paper id="matHeaderPanelWrapper" background="[[background]]" z="[[_computeZ(raised)]]">
-            <div id="matHeaderPanelFooter">
-                <content id="footerContent" select="[footer]"></content>
-            </div>
             <div id="matHeaderPanelMain" on-scroll="_handleScroll">
                 <div id="matHeaderPanelHeader">
                     <content id="headerContent" select="[header]"></content>
                 </div>
                 <div id="matHeaderPanelBody">
                     <div id="matHeaderPanelScroller" on-scroll="_handleScroll">
-                        <content id="bodyContent"></content>
+                        <content id="bodyContent" select=":not([footer])"></content>
                     </div>
                 </div>
+            </div>
+            <div id="matHeaderPanelFooter">
+                <content id="footerContent" select="[footer]"></content>
             </div>
         </mat-paper>
     </template>

@@ -18,19 +18,19 @@ It should be used in conjunction with mat-header-panel.
 @demo http://expandjs.com/demo/mat-header-panel
 
 @dependency polymer Polymer/polymer#^1.0.0
-@dependency expandjs ExpandJS/expandjs#0.9.3
+@dependency expandjs ExpandJS/expandjs#0.9.4
 @dependency iron-flex-layout PolymerElements/iron-flex-layout#^1.0.0
-@dependency mat-divider ExpandJS/mat-divider#0.9.3
-@dependency mat-icon-button ExpandJS/mat-icon-button#0.9.3
-@dependency mat-icons ExpandJS/mat-icons#0.9.3
-@dependency mat-paper ExpandJS/mat-paper#0.9.3
+@dependency mat-divider ExpandJS/mat-divider#0.9.4
+@dependency mat-icon-button ExpandJS/mat-icon-button#0.9.4
+@dependency mat-icons ExpandJS/mat-icons#0.9.4
+@dependency mat-paper ExpandJS/mat-paper#0.9.4
 
-@devDependency mat-content ExpandJS/mat-content#0.9.3
-@devDependency mat-demo ExpandJS/mat-demo#0.9.3
-@devDependency mat-menu ExpandJS/mat-menu#0.9.3
-@devDependency mat-menu-button ExpandJS/mat-menu-button#0.9.3
-@devDependency mat-option ExpandJS/mat-option#0.9.3
-@devDependency mat-toolbar ExpandJS/mat-toolbar#0.9.3
+@devDependency mat-content ExpandJS/mat-content#0.9.4
+@devDependency mat-demo ExpandJS/mat-demo#0.9.4
+@devDependency mat-menu ExpandJS/mat-menu#0.9.4
+@devDependency mat-menu-button ExpandJS/mat-menu-button#0.9.4
+@devDependency mat-option ExpandJS/mat-option#0.9.4
+@devDependency mat-toolbar ExpandJS/mat-toolbar#0.9.4
 -->
 
 <link rel="import" href="../polymer/polymer.html">
@@ -73,10 +73,25 @@ It should be used in conjunction with mat-header-panel.
             display: none !important;
         }
 
+        :host #matHeaderMain {
+            @apply(--layout-horizontal);
+            @apply(--layout-center);
+            height: 56px;
+            overflow: hidden;
+            padding: 0 4px 0 16px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        :host #matHeaderNav {
+            margin: 4px 24px 4px -8px;
+        }
+
+        :host(:not([nav])) #matHeaderNav {
+            display: none !important;
+        }
+
         :host #matHeaderExtended {
-            -ms-flex-order: 2;
-            -webkit-order: 2;
-            order: 2;
             padding: 0 16px;
         }
 
@@ -96,27 +111,6 @@ It should be used in conjunction with mat-header-panel.
             margin-left: -72px;
         }
 
-        :host #matHeaderMain {
-            @apply(--layout-horizontal);
-            @apply(--layout-center);
-            height: 56px;
-            -ms-flex-order: 1;
-            -webkit-order: 1;
-            order: 1;
-            overflow: hidden;
-            padding: 0 4px 0 16px;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        :host #matHeaderNav {
-            margin: 4px 24px 4px -8px;
-        }
-
-        :host(:not([nav])) #matHeaderNav {
-            display: none !important;
-        }
-
         /* TABLET */
 
         @media (min-width: 960px) {
@@ -129,6 +123,11 @@ It should be used in conjunction with mat-header-panel.
             :host #matHeaderWrapper {
                 margin: 0 -12px 0 -24px;
                 width: calc(100% + 36px);
+            }
+
+            :host #matHeaderMain {
+                height: 64px;
+                padding: 0 12px 0 24px;
             }
 
             :host #matHeaderExtended {
@@ -146,23 +145,18 @@ It should be used in conjunction with mat-header-panel.
             :host([inset]) #matHeaderExtended ::content mat-tabs {
                 margin-left: -80px;
             }
-
-            :host #matHeaderMain {
-                height: 64px;
-                padding: 0 12px 0 24px;
-            }
         }
     </style>
 
     <template>
         <mat-paper id="matHeaderWrapper" background="[[background]]" brightness="header" z="[[z]]">
             <mat-divider id="matHeaderDivider" baseline></mat-divider>
-            <div id="matHeaderExtended">
-                <content id="extendedContent" select="[extended]"></content>
-            </div>
             <div id="matHeaderMain">
                 <mat-icon-button id="matHeaderNav" icon="navigation:menu" on-xp-activate="_handleNav"></mat-icon-button>
-                <content id="content"></content>
+                <content id="content" select=":not([extended])"></content>
+            </div>
+            <div id="matHeaderExtended">
+                <content id="extendedContent" select="[extended]"></content>
             </div>
         </mat-paper>
     </template>

@@ -1,7 +1,7 @@
 {
   "name": "mat-header-panel",
   "license": "BSD-3-Clause",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "A custom element used to display a Material Design container with an app bar at the top",
   "homepage": "http://expandjs.com/elements/mat-header-panel",
   "authors": [
@@ -25,21 +25,21 @@
     "**/.*"
   ],
   "dependencies": {
-    "expandjs": "ExpandJS/expandjs#0.9.3",
-    "mat-divider": "ExpandJS/mat-divider#0.9.3",
-    "mat-icon-button": "ExpandJS/mat-icon-button#0.9.3",
-    "mat-icons": "ExpandJS/mat-icons#0.9.3",
-    "mat-paper": "ExpandJS/mat-paper#0.9.3",
+    "expandjs": "ExpandJS/expandjs#0.9.4",
+    "mat-divider": "ExpandJS/mat-divider#0.9.4",
+    "mat-icon-button": "ExpandJS/mat-icon-button#0.9.4",
+    "mat-icons": "ExpandJS/mat-icons#0.9.4",
+    "mat-paper": "ExpandJS/mat-paper#0.9.4",
     "polymer": "Polymer/polymer#^1.0.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0"
   },
   "devDependencies": {
-    "mat-content": "ExpandJS/mat-content#0.9.3",
-    "mat-demo": "ExpandJS/mat-demo#0.9.3",
-    "mat-icons": "ExpandJS/mat-icons#0.9.3",
-    "mat-menu": "ExpandJS/mat-menu#0.9.3",
-    "mat-menu-button": "ExpandJS/mat-menu-button#0.9.3",
-    "mat-option": "ExpandJS/mat-option#0.9.3",
-    "mat-toolbar": "ExpandJS/mat-toolbar#0.9.3"
+    "mat-content": "ExpandJS/mat-content#0.9.4",
+    "mat-demo": "ExpandJS/mat-demo#0.9.4",
+    "mat-icons": "ExpandJS/mat-icons#0.9.4",
+    "mat-menu": "ExpandJS/mat-menu#0.9.4",
+    "mat-menu-button": "ExpandJS/mat-menu-button#0.9.4",
+    "mat-option": "ExpandJS/mat-option#0.9.4",
+    "mat-toolbar": "ExpandJS/mat-toolbar#0.9.4"
   }
 }
