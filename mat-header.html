@@ -153,10 +153,10 @@ It should be used in conjunction with mat-header-panel.
             <mat-divider id="matHeaderDivider" baseline></mat-divider>
             <div id="matHeaderMain">
                 <mat-icon-button id="matHeaderNav" icon="navigation:menu" on-xp-activate="_handleNav"></mat-icon-button>
-                <content id="content" select=":not([extended])"></content>
+                <content id="content" select=':not([extended=""])'></content>
             </div>
             <div id="matHeaderExtended">
-                <content id="extendedContent" select="[extended]"></content>
+                <content id="extendedContent" select='[extended=""]'></content>
             </div>
         </mat-paper>
     </template>

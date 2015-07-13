@@ -91,16 +91,16 @@ It should be used in conjunction with mat-header.
         <mat-paper id="matHeaderPanelWrapper" background="[[background]]" z="[[_computeZ(raised)]]">
             <div id="matHeaderPanelMain" on-scroll="_handleScroll">
                 <div id="matHeaderPanelHeader">
-                    <content id="headerContent" select="[header]"></content>
+                    <content id="headerContent" select='[header=""]'></content>
                 </div>
                 <div id="matHeaderPanelBody">
                     <div id="matHeaderPanelScroller" on-scroll="_handleScroll">
-                        <content id="bodyContent" select=":not([footer])"></content>
+                        <content id="bodyContent" select=':not([footer=""])'></content>
                     </div>
                 </div>
             </div>
             <div id="matHeaderPanelFooter">
-                <content id="footerContent" select="[footer]"></content>
+                <content id="footerContent" select='[footer=""]'></content>
             </div>
         </mat-paper>
     </template>
