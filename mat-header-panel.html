@@ -7,11 +7,12 @@ The complete set of contributors may be found at https://expandjs.github.io/CONT
 -->
 
 <!--
-This element is used to display a material scrollable wrapper with an app bar at the top.
+This element is used to display a material scrollable wrapper with an app bar.
+
 It should be used in conjunction with mat-header.
 
 @element mat-header-panel
-@description A custom element used to display a Material Design container with an app bar at the top
+@description A custom element used to display a Material Design container with an app bar
 @keywords material design, material header panel, web app, html5, expandjs, web-components
 @group containers
 @homepage http://expandjs.com/elements/mat-header-panel
@@ -74,12 +75,12 @@ It should be used in conjunction with mat-header.
         }
 
         :host #matHeaderPanelBody {
-            @apply(--layout-vertical);
             @apply(--layout-flex);
+            position: relative;
         }
 
         :host #matHeaderPanelScroller {
-            @apply(--layout-flex);
+            @apply(--layout-fit);
         }
 
         :host [scroller] {
