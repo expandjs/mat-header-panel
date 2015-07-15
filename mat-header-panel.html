@@ -78,8 +78,12 @@ It should be used in conjunction with mat-header.
             @apply(--layout-flex);
         }
 
-        :host #matHeaderPanelScroller {
+        :host #matHeaderPanelPositioner {
             @apply(--layout-fit);
+        }
+
+        :host #matHeaderPanelScroller {
+            height: 100%;
         }
 
         :host [scroller] {
@@ -94,8 +98,10 @@ It should be used in conjunction with mat-header.
                     <content id="headerContent" select='[header=""]'></content>
                 </div>
                 <div id="matHeaderPanelBody">
-                    <div id="matHeaderPanelScroller" on-scroll="_handleScroll">
-                        <content id="bodyContent" select=':not([footer=""])'></content>
+                    <div id="matHeaderPanelPositioner">
+                        <div id="matHeaderPanelScroller" on-scroll="_handleScroll">
+                            <content id="bodyContent" select=':not([footer=""])'></content>
+                        </div>
                     </div>
                 </div>
             </div>
