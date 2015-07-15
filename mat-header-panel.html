@@ -46,6 +46,7 @@ It should be used in conjunction with mat-header.
             display: block;
             overflow: visible;
             text-align: left;
+            z-index: 0;
         }
 
         :host #matHeaderPanelWrapper {
@@ -59,14 +60,14 @@ It should be used in conjunction with mat-header.
             @apply(--layout-flex);
         }
 
-        :host #matHeaderPanelFooter,
         :host #matHeaderPanelHeader,
-        :host #matHeaderPanelBody {
+        :host #matHeaderPanelBody,
+        :host #matHeaderPanelFooter {
             position: relative;
         }
 
-        :host #matHeaderPanelFooter,
-        :host #matHeaderPanelHeader {
+        :host #matHeaderPanelHeader,
+        :host #matHeaderPanelFooter {
             z-index: 1;
         }
 
@@ -76,6 +77,7 @@ It should be used in conjunction with mat-header.
 
         :host #matHeaderPanelBody {
             @apply(--layout-flex);
+            z-index: 0;
         }
 
         :host #matHeaderPanelPositioner {
@@ -100,7 +102,7 @@ It should be used in conjunction with mat-header.
                 <div id="matHeaderPanelBody">
                     <div id="matHeaderPanelPositioner">
                         <div id="matHeaderPanelScroller" on-scroll="_handleScroll">
-                            <content id="bodyContent" select=':not([footer=""])'></content>
+                            <content id="bodyContent" select=':not([footer=""]):not([header=""])'></content>
                         </div>
                     </div>
                 </div>
