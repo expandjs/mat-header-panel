@@ -46,7 +46,6 @@ It should be used in conjunction with mat-header.
             display: block;
             overflow: visible;
             text-align: left;
-            z-index: 0;
         }
 
         :host #matHeaderPanelWrapper {
@@ -66,18 +65,17 @@ It should be used in conjunction with mat-header.
             position: relative;
         }
 
-        :host #matHeaderPanelHeader,
-        :host #matHeaderPanelFooter {
-            z-index: 1;
-        }
-
-        :host([emptyFooter]) #matHeaderPanelFooter {
-            display: none !important;
+        :host #matHeaderPanelHeader {
+            -ms-flex-order: 1;
+            -webkit-order: 1;
+            order: 1;
         }
 
         :host #matHeaderPanelBody {
             @apply(--layout-flex);
-            z-index: 0;
+            -ms-flex-order: 2;
+            -webkit-order: 2;
+            order: 2;
         }
 
         :host #matHeaderPanelPositioner {
@@ -88,6 +86,10 @@ It should be used in conjunction with mat-header.
             height: 100%;
         }
 
+        :host([emptyFooter]) #matHeaderPanelFooter {
+            display: none !important;
+        }
+
         :host [scroller] {
             overflow-y: auto;
         }
@@ -96,15 +98,15 @@ It should be used in conjunction with mat-header.
     <template>
         <mat-paper id="matHeaderPanelWrapper" background="[[background]]" z="[[_computeZ(raised)]]">
             <div id="matHeaderPanelMain" on-scroll="_handleScroll">
-                <div id="matHeaderPanelHeader">
-                    <content id="headerContent" select='[header=""]'></content>
-                </div>
                 <div id="matHeaderPanelBody">
                     <div id="matHeaderPanelPositioner">
                         <div id="matHeaderPanelScroller" on-scroll="_handleScroll">
                             <content id="bodyContent" select=':not([footer=""]):not([header=""])'></content>
                         </div>
                     </div>
+                </div>
+                <div id="matHeaderPanelHeader">
+                    <content id="headerContent" select='[header=""]'></content>
                 </div>
             </div>
             <div id="matHeaderPanelFooter">
