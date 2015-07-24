@@ -7,9 +7,44 @@ The complete set of contributors may be found at https://expandjs.github.io/CONT
 -->
 
 <!--
-This element is used to display a material scrollable wrapper with an app bar.
+An element used to display a Material Design container with an [app bar](http://www.google.com/design/spec/layout/structure.html#structure-app-bar) and [scrollable content](http://www.google.com/design/spec/patterns/scrolling-techniques.html#).
 
-It should be used in conjunction with mat-header.
+By default, the app bar scrolls out of the view with the content and, as soon as you scroll
+upwards, the app bar instantly shows itself.
+
+```html
+<mat-header-panel>
+    <mat-header>...</mat-header>
+    <mat-content>...</mat-content>
+</mat-header-panel>
+```
+
+Additional [scrolling modes](http://www.google.com/design/spec/components/toolbars.html#toolbars-usage) are provided, such as:
+
+- **fixed**: the app bar will always will be on top of the content and will not scroll
+- **seamed**: the app bar is at the same level of the content and will freely scroll with it
+- **waterfall**: the app bar raises above the content as soon as the scrolling happens
+
+```html
+<mat-header-panel mode="fixed">
+    <mat-header>...</mat-header>
+    <mat-content>...</mat-content>
+</mat-header-panel>
+```
+
+A footer can also be added, in the form of a [Material Design navigation bar](https://www.google.com/design/spec/layout/structure.html#structure-system-bars).
+
+```html
+<mat-header-panel>
+    <mat-header>...</mat-header>
+    <mat-content>...</mat-content>
+    <mat-toolbar justified="around" footer>
+        <mat-icon-button icon="content:undo"></mat-icon-button>
+        <mat-icon-button icon="action:home"></mat-icon-button>
+        <mat-icon-button icon="content:send"></mat-icon-button>
+    </mat-toolbar>
+</mat-header-panel>
+```
 
 @element mat-header-panel
 @description A custom element used to display a Material Design container with an app bar
@@ -19,17 +54,17 @@ It should be used in conjunction with mat-header.
 @demo http://expandjs.com/demo/mat-header-panel
 
 @dependency polymer Polymer/polymer#^1.0.0
-@dependency expandjs ExpandJS/expandjs#0.9.4
+@dependency expandjs ExpandJS/expandjs#0.9.5
 @dependency iron-flex-layout PolymerElements/iron-flex-layout#^1.0.0
-@dependency mat-paper ExpandJS/mat-paper#0.9.4
+@dependency mat-paper ExpandJS/mat-paper#0.9.5
 
-@devDependency mat-content ExpandJS/mat-content#0.9.4
-@devDependency mat-demo ExpandJS/mat-demo#0.9.4
-@devDependency mat-icons ExpandJS/mat-icons#0.9.4
-@devDependency mat-menu ExpandJS/mat-menu#0.9.4
-@devDependency mat-menu-button ExpandJS/mat-menu-button#0.9.4
-@devDependency mat-option ExpandJS/mat-option#0.9.4
-@devDependency mat-toolbar ExpandJS/mat-toolbar#0.9.4
+@devDependency mat-content ExpandJS/mat-content#0.9.5
+@devDependency mat-demo ExpandJS/mat-demo#0.9.5
+@devDependency mat-icons ExpandJS/mat-icons#0.9.5
+@devDependency mat-menu ExpandJS/mat-menu#0.9.5
+@devDependency mat-menu-button ExpandJS/mat-menu-button#0.9.5
+@devDependency mat-option ExpandJS/mat-option#0.9.5
+@devDependency mat-toolbar ExpandJS/mat-toolbar#0.9.5
 -->
 
 <link rel="import" href="../polymer/polymer.html">
