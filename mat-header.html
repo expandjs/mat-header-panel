@@ -362,13 +362,16 @@ The header's contents can also be customized by adding any additional tags into 
 
                 // Vars
                 var self   = this,
-                    drawer = XP.findParentElement(Polymer.dom(self), '[drawer=""]'),
                     panel  = XP.findParentElement(Polymer.dom(self), 'mat-header-panel'),
+                    drawer = XP.findParentElement(Polymer.dom(self), '[drawer=""]'),
                     shell  = XP.findParentElement(Polymer.dom(self), 'mat-shell');
 
                 // Setting
                 self._setDrawer((!drawer && shell && shell.drawer) || null);
                 self._setPanel(panel);
+
+                // Delaying
+                XP.delay(self._setDrawer.bind(self, (!drawer && shell && shell.drawer) || null), 2, true);
 
                 // Mutating
                 self.mutated();
