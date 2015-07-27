@@ -118,6 +118,10 @@ The header's contents can also be customized by adding any additional tags into 
             white-space: nowrap;
         }
 
+        :host #matHeaderMain::content [label=""] {
+            @apply(--layout-flex);
+        }
+
         :host #matHeaderNav {
             margin: 4px 24px 4px -8px;
         }
