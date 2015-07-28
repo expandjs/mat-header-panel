@@ -76,12 +76,6 @@ The header's contents can also be customized by adding any additional tags into 
 <link rel="import" href="../mat-icons/navigation-icons.html">
 <link rel="import" href="../mat-paper/mat-paper.html">
 
-<style>
-    html [drawer=""] mat-header #matHeaderWrapper {
-        background: transparent;
-    }
-</style>
-
 <dom-module id="mat-header">
 
     <style>
@@ -101,6 +95,10 @@ The header's contents can also be customized by adding any additional tags into 
             margin: 0 -4px 0 -16px;
             overflow: visible;
             width: calc(100% + 20px);
+        }
+
+        :host-context([drawer=""]) #matHeaderWrapper {
+            background: transparent;
         }
 
         :host(:not([z="0"])) #matHeaderDivider {
