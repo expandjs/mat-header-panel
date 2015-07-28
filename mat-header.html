@@ -188,7 +188,7 @@ The header's contents can also be customized by adding any additional tags into 
         <mat-paper id="matHeaderWrapper" background="[[background]]" brightness="header" z="[[z]]">
             <mat-divider id="matHeaderDivider" baseline></mat-divider>
             <div id="matHeaderMain">
-                <mat-icon-button id="matHeaderNav" icon="navigation:menu" target="drawer"></mat-icon-button>
+                <mat-icon-button id="matHeaderNav" icon="navigation:menu" target="[[drawer]]" toggles-target></mat-icon-button>
                 <content id="content" select=':not([extended=""])'></content>
             </div>
             <div id="matHeaderExtended">
