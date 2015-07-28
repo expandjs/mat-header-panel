@@ -64,7 +64,6 @@ The header's contents can also be customized by adding any additional tags into 
 @devDependency mat-content ExpandJS/mat-content#0.9.5
 @devDependency mat-demo ExpandJS/mat-demo#0.9.5
 @devDependency mat-menu ExpandJS/mat-menu#0.9.5
-@devDependency mat-menu-button ExpandJS/mat-menu-button#0.9.5
 @devDependency mat-option ExpandJS/mat-option#0.9.5
 @devDependency mat-toolbar ExpandJS/mat-toolbar#0.9.5
 -->
@@ -191,7 +190,7 @@ The header's contents can also be customized by adding any additional tags into 
         <mat-paper id="matHeaderWrapper" background="[[background]]" brightness="header" z="[[z]]">
             <mat-divider id="matHeaderDivider" baseline></mat-divider>
             <div id="matHeaderMain">
-                <mat-icon-button id="matHeaderNav" icon="navigation:menu" on-xp-activate="_handleNav"></mat-icon-button>
+                <mat-icon-button id="matHeaderNav" icon="navigation:menu" target="drawer"></mat-icon-button>
                 <content id="content" select=':not([extended=""])'></content>
             </div>
             <div id="matHeaderExtended">
@@ -415,19 +414,6 @@ The header's contents can also be customized by adding any additional tags into 
 
                 // Setting
                 self._setNav(!!self.drawer && self.drawer.narrow && !self.drawer.empty);
-            },
-
-            // HANDLER
-            _handleNav: function (event) {
-
-                // Vars
-                var self = this;
-
-                // Stopping
-                event.stopPropagation();
-
-                // Showing
-                if (self.drawer) { self.drawer.show(); }
             },
 
             // HANDLER
