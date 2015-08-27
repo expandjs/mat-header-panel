@@ -78,113 +78,114 @@ The header's contents can also be customized by adding any additional tags into 
 
 <dom-module id="mat-header">
 
-    <style>
-        :host {
-            @apply(--mat-font-headline);
-            display: block;
-            line-height: 32px !important; /* override */
-            min-height: 56px;
-            padding: 0 4px 0 16px;
-            overflow: visible;
-            text-align: left;
-        }
+    <template>
 
-        :host #matHeaderWrapper {
-            @apply(--layout-vertical);
-            border-radius: inherit;
-            margin: 0 -4px 0 -16px;
-            overflow: visible;
-            width: calc(100% + 20px);
-        }
-
-        :host-context([drawer=""]) #matHeaderWrapper {
-            background: transparent;
-        }
-
-        :host(:not([z="0"])) #matHeaderDivider {
-            display: none !important;
-        }
-
-        :host #matHeaderMain {
-            @apply(--layout-horizontal);
-            @apply(--layout-center);
-            height: 56px;
-            overflow: hidden;
-            padding: 0 4px 0 16px;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        :host #matHeaderMain ::content [label=""] {
-            @apply(--layout-flex);
-        }
-
-        :host #matHeaderNav {
-            margin: 4px 24px 4px -8px;
-        }
-
-        :host(:not([nav])) #matHeaderNav {
-            display: none !important;
-        }
-
-        :host #matHeaderExtended {
-            padding: 0 16px;
-        }
-
-        :host([emptyExtended]) #matHeaderExtended {
-            display: none !important;
-        }
-
-        :host([inset]) #matHeaderExtended {
-            padding-left: 72px;
-        }
-
-        :host #matHeaderExtended ::content mat-tabs {
-            margin: 0 -16px;
-        }
-
-        :host([inset]) #matHeaderExtended ::content mat-tabs {
-            margin-left: -72px;
-        }
-
-        /* TABLET */
-
-        @media (min-width: 960px) {
-
+        <style>
             :host {
-                min-height: 64px;
-                padding: 0 12px 0 24px;
+                @apply(--mat-font-headline);
+                display: block;
+                line-height: 32px !important; /* override */
+                min-height: 56px;
+                padding: 0 4px 0 16px;
+                overflow: visible;
+                text-align: left;
             }
 
             :host #matHeaderWrapper {
-                margin: 0 -12px 0 -24px;
-                width: calc(100% + 36px);
+                @apply(--layout-vertical);
+                border-radius: inherit;
+                margin: 0 -4px 0 -16px;
+                overflow: visible;
+                width: calc(100% + 20px);
+            }
+
+            :host-context([drawer=""]) #matHeaderWrapper {
+                background: transparent;
+            }
+
+            :host(:not([z="0"])) #matHeaderDivider {
+                display: none !important;
             }
 
             :host #matHeaderMain {
-                height: 64px;
-                padding: 0 12px 0 24px;
+                @apply(--layout-horizontal);
+                @apply(--layout-center);
+                height: 56px;
+                overflow: hidden;
+                padding: 0 4px 0 16px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            :host #matHeaderMain ::content [label=""] {
+                @apply(--layout-flex);
+            }
+
+            :host #matHeaderNav {
+                margin: 4px 24px 4px -8px;
+            }
+
+            :host(:not([nav])) #matHeaderNav {
+                display: none !important;
             }
 
             :host #matHeaderExtended {
-                padding: 0 24px;
+                padding: 0 16px;
+            }
+
+            :host([emptyExtended]) #matHeaderExtended {
+                display: none !important;
             }
 
             :host([inset]) #matHeaderExtended {
-                padding-left: 80px;
+                padding-left: 72px;
             }
 
             :host #matHeaderExtended ::content mat-tabs {
-                margin: 0 -24px;
+                margin: 0 -16px;
             }
 
             :host([inset]) #matHeaderExtended ::content mat-tabs {
-                margin-left: -80px;
+                margin-left: -72px;
             }
-        }
-    </style>
 
-    <template>
+            /* TABLET */
+
+            @media (min-width: 960px) {
+
+                :host {
+                    min-height: 64px;
+                    padding: 0 12px 0 24px;
+                }
+
+                :host #matHeaderWrapper {
+                    margin: 0 -12px 0 -24px;
+                    width: calc(100% + 36px);
+                }
+
+                :host #matHeaderMain {
+                    height: 64px;
+                    padding: 0 12px 0 24px;
+                }
+
+                :host #matHeaderExtended {
+                    padding: 0 24px;
+                }
+
+                :host([inset]) #matHeaderExtended {
+                    padding-left: 80px;
+                }
+
+                :host #matHeaderExtended ::content mat-tabs {
+                    margin: 0 -24px;
+                }
+
+                :host([inset]) #matHeaderExtended ::content mat-tabs {
+                    margin-left: -80px;
+                }
+            }
+        </style>
+
         <mat-paper id="matHeaderWrapper" background="[[background]]" brightness="header" z="[[z]]">
             <mat-divider id="matHeaderDivider" baseline></mat-divider>
             <div id="matHeaderMain">
@@ -195,6 +196,7 @@ The header's contents can also be customized by adding any additional tags into 
                 <content id="extendedContent" select='[extended=""]'></content>
             </div>
         </mat-paper>
+
     </template>
 
     <script>

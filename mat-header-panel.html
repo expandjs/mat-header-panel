@@ -76,63 +76,64 @@ A footer can also be added, in the form of a [Material Design navigation bar](ht
 
 <dom-module id="mat-header-panel">
 
-    <style>
-        :host {
-            @apply(--layout-fit);
-            display: block;
-            overflow: visible;
-            text-align: left;
-        }
-
-        :host #matHeaderPanelWrapper {
-            @apply(--layout-vertical);
-            @apply(--layout-fit);
-            background: transparent;
-            overflow: hidden;
-        }
-
-        :host #matHeaderPanelMain {
-            @apply(--layout-vertical);
-            @apply(--layout-flex);
-        }
-
-        :host #matHeaderPanelHeader,
-        :host #matHeaderPanelBody,
-        :host #matHeaderPanelFooter {
-            position: relative;
-        }
-
-        :host #matHeaderPanelHeader {
-            -ms-flex-order: 1;
-            -webkit-order: 1;
-            order: 1;
-        }
-
-        :host #matHeaderPanelBody {
-            @apply(--layout-flex);
-            -ms-flex-order: 2;
-            -webkit-order: 2;
-            order: 2;
-        }
-
-        :host #matHeaderPanelPositioner {
-            @apply(--layout-fit);
-        }
-
-        :host #matHeaderPanelScroller {
-            height: 100%;
-        }
-
-        :host([emptyFooter]) #matHeaderPanelFooter {
-            display: none !important;
-        }
-
-        :host [scroller] {
-            overflow-y: auto;
-        }
-    </style>
-
     <template>
+
+        <style>
+            :host {
+                @apply(--layout-fit);
+                display: block;
+                overflow: visible;
+                text-align: left;
+            }
+
+            :host #matHeaderPanelWrapper {
+                @apply(--layout-vertical);
+                @apply(--layout-fit);
+                background: transparent;
+                overflow: hidden;
+            }
+
+            :host #matHeaderPanelMain {
+                @apply(--layout-vertical);
+                @apply(--layout-flex);
+            }
+
+            :host #matHeaderPanelHeader,
+            :host #matHeaderPanelBody,
+            :host #matHeaderPanelFooter {
+                position: relative;
+            }
+
+            :host #matHeaderPanelHeader {
+                -ms-flex-order: 1;
+                -webkit-order: 1;
+                order: 1;
+            }
+
+            :host #matHeaderPanelBody {
+                @apply(--layout-flex);
+                -ms-flex-order: 2;
+                -webkit-order: 2;
+                order: 2;
+            }
+
+            :host #matHeaderPanelPositioner {
+                @apply(--layout-fit);
+            }
+
+            :host #matHeaderPanelScroller {
+                height: 100%;
+            }
+
+            :host([emptyFooter]) #matHeaderPanelFooter {
+                display: none !important;
+            }
+
+            :host [scroller] {
+                overflow-y: auto;
+            }
+        </style>
+
         <mat-paper id="matHeaderPanelWrapper" background="[[background]]" z="[[_computeZ(raised)]]">
             <div id="matHeaderPanelMain" on-scroll="_handleScroll">
                 <div id="matHeaderPanelBody">
@@ -150,6 +151,7 @@ A footer can also be added, in the form of a [Material Design navigation bar](ht
                 <content id="footerContent" select='[footer=""]'></content>
             </div>
         </mat-paper>
+
     </template>
 
     <script>
