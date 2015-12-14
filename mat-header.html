@@ -7,14 +7,15 @@ The complete set of contributors may be found at https://expandjs.github.io/CONT
 -->
 
 <!--
-An element used to display a [Material Design app bar](http://www.google.com/design/spec/layout/structure.html#structure-app-bar).
+A custom element used to display a [Material Design app bar](http://www.google.com/design/spec/layout/structure.html#structure-app-bar).
 
-It should be used in conjunction with [mat-header-panel](http://expandjs.com/elements/mat-header-panel) for different scrolling interactions.
+It must be used in conjunction with
+[mat-header-panel](http://expandjs.com/elements/mat-header-panel).
 
 ```html
 <mat-header-panel>
     <mat-header>...</mat-header>
-    <mat-content>...</mat-content>
+    ...
 </mat-header-panel>
 ```
 
@@ -28,7 +29,7 @@ the header will automatically create a *burger icon*, that will act as a toggle 
 
     <mat-header-panel>
         <mat-header>...</mat-header>
-        <mat-content>...</mat-content>
+        ...
     </mat-header-panel>
 
 </mat-drawer-panel>
@@ -39,75 +40,68 @@ The header's contents can also be customized by adding any additional tags into 
 ```html
 <mat-header background="red">
     <h1>Main title</h1>
-    <div extended>
-        <h2>Secondary title</h2>
-    </div>
+    <h2 class="extended">Secondary title</h2>
 </mat-header>
 ```
 
 @element mat-header
 @description A custom element used to display a Material Design app bar
-@keywords material design, material header, material app bar, web app, html5, expandjs, web-components
+@keywords material design, expandjs, web app, custom elements, web-components
 @group containers
+@hot
+
 @homepage http://expandjs.com/elements/mat-header
 @repository https://github.com/ExpandJS/mat-header
 @demo http://expandjs.com/demo/mat-header-panel
 
-@dependency polymer Polymer/polymer#^1.1.0
-@dependency expandjs ExpandJS/expandjs#0.9.11
-@dependency iron-flex-layout PolymerElements/iron-flex-layout#^1.0.0
-@dependency mat-divider ExpandJS/mat-divider#0.9.11
-@dependency mat-icon-button ExpandJS/mat-icon-button#0.9.11
-@dependency mat-icons ExpandJS/mat-icons#0.9.11
-@dependency mat-paper ExpandJS/mat-paper#0.9.11
+@behavior mat-paper-behavior /bower_components/mat-paper/mat-paper-behavior.html
 
-@devDependency mat-content ExpandJS/mat-content#0.9.11
-@devDependency mat-demo ExpandJS/mat-demo#0.9.11
-@devDependency mat-menu ExpandJS/mat-menu#0.9.11
-@devDependency mat-option ExpandJS/mat-option#0.9.11
-@devDependency mat-toolbar ExpandJS/mat-toolbar#0.9.11
+@dependency polymer Polymer/polymer#^1.2.0
+@dependency expandjs ExpandJS/expandjs#0.10.0
+@dependency iron-flex-layout PolymerElements/iron-flex-layout#^1.0.0
+@dependency mat-icon-button ExpandJS/mat-icon-button#0.10.0
+@dependency mat-icons ExpandJS/mat-icons#0.10.0
+@dependency mat-paper ExpandJS/mat-paper#0.10.0
+@dependency mat-typography ExpandJS/mat-typography#0.10.0
+
+@devDependency mat-content ExpandJS/mat-content#0.10.0
+@devDependency mat-demo ExpandJS/mat-demo#0.10.0
+@devDependency mat-menu ExpandJS/mat-menu#0.10.0
+@devDependency mat-option ExpandJS/mat-option#0.10.0
+@devDependency mat-toolbar ExpandJS/mat-toolbar#0.10.0
 -->
 
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../expandjs/expandjs.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../mat-divider/mat-divider.html">
 <link rel="import" href="../mat-icon-button/mat-icon-button.html">
-<link rel="import" href="../mat-icons/navigation-icons.html">
-<link rel="import" href="../mat-paper/mat-paper.html">
+<link rel="import" href="../mat-icons/mat-icons.html">
+<link rel="import" href="../mat-paper/mat-paper-behavior.html">
+<link rel="import" href="../mat-paper/mat-paper-styles.html">
+<link rel="import" href="../mat-typography/mat-typography.html">
 
 <dom-module id="mat-header">
 
-    <template>
+    <template strip-whitespace>
+
+        <style include="mat-paper-styles"></style>
 
         <style>
             :host {
                 @apply(--mat-font-headline);
-                display: block;
                 line-height: 32px !important; /* override */
                 min-height: 56px;
                 padding: 0 4px 0 16px;
-                overflow: visible;
-                text-align: left;
             }
 
-            :host #matHeaderWrapper {
+            :host .wrapper {
                 @apply(--layout-vertical);
-                border-radius: inherit;
                 margin: 0 -4px 0 -16px;
-                overflow: visible;
+                position: relative;
                 width: calc(100% + 20px);
             }
 
-            :host-context([drawer=""]) #matHeaderWrapper {
-                background: transparent;
-            }
-
-            :host(:not([z="0"])) #matHeaderDivider {
-                display: none !important;
-            }
-
-            :host #matHeaderMain {
+            :host .main {
                 @apply(--layout-horizontal);
                 @apply(--layout-center);
                 height: 56px;
@@ -117,45 +111,41 @@ The header's contents can also be customized by adding any additional tags into 
                 white-space: nowrap;
             }
 
-            :host #matHeaderMain ::content [label=""] {
+            :host .main ::content > .label {
                 @apply(--layout-flex);
                 overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
+                text-overflow: ellipsis !important;
+                white-space: nowrap !important;
             }
 
-            :host #matHeaderNav {
+            :host .button {
                 height: 24px;
                 margin: 4px 24px 4px -8px;
                 padding: 8px;
                 width: 24px;
             }
 
-            :host(:not([nav])) #matHeaderNav {
+            :host(:not([nav])) .button {
                 display: none !important;
             }
 
-            :host #matHeaderExtended {
+            :host .extended {
                 padding: 0 16px;
             }
 
-            :host([emptyExtended]) #matHeaderExtended {
-                display: none !important;
-            }
-
-            :host([inset]) #matHeaderExtended {
+            :host([inset]) .extended {
                 padding-left: 72px;
             }
 
-            :host #matHeaderExtended ::content mat-tabs {
+            :host .extended ::content mat-tabs {
                 margin: 0 -16px;
             }
 
-            :host([inset]) #matHeaderExtended ::content mat-tabs {
+            :host([inset]) .extended ::content mat-tabs {
                 margin-left: -72px;
             }
 
-            /* TABLET */
+            /* DESKTOP */
 
             @media (min-width: 960px) {
 
@@ -164,44 +154,43 @@ The header's contents can also be customized by adding any additional tags into 
                     padding: 0 12px 0 24px;
                 }
 
-                :host #matHeaderWrapper {
+                :host .wrapper {
                     margin: 0 -12px 0 -24px;
                     width: calc(100% + 36px);
                 }
 
-                :host #matHeaderMain {
+                :host .main {
                     height: 64px;
                     padding: 0 12px 0 24px;
                 }
 
-                :host #matHeaderExtended {
+                :host .extended {
                     padding: 0 24px;
                 }
 
-                :host([inset]) #matHeaderExtended {
+                :host([inset]) .extended {
                     padding-left: 80px;
                 }
 
-                :host #matHeaderExtended ::content mat-tabs {
+                :host .extended ::content mat-tabs {
                     margin: 0 -24px;
                 }
 
-                :host([inset]) #matHeaderExtended ::content mat-tabs {
+                :host([inset]) .extended ::content mat-tabs {
                     margin-left: -80px;
                 }
             }
         </style>
 
-        <mat-paper id="matHeaderWrapper" background="[[background]]" brightness="header" z="[[z]]">
-            <mat-divider id="matHeaderDivider" baseline></mat-divider>
-            <div id="matHeaderMain">
-                <mat-icon-button id="matHeaderNav" behavior="toggle" icon="navigation:menu" target="[[drawer]]"></mat-icon-button>
-                <content id="content" select=':not([extended=""])'></content>
+        <div class="wrapper">
+            <div class="main">
+                <mat-icon-button class="nav button" behavior="toggle" icon="mat:menu" target="[[drawer]]"></mat-icon-button>
+                <content select=":not(.extended)"></content>
             </div>
-            <div id="matHeaderExtended">
-                <content id="extendedContent" select='[extended=""]'></content>
+            <div class="extended">
+                <content select=".extended"></content>
             </div>
-        </mat-paper>
+        </div>
 
     </template>
 
@@ -211,26 +200,27 @@ The header's contents can also be customized by adding any additional tags into 
             // ELEMENT
             is: 'mat-header',
 
-            /*********************************************************************/
+            // BEHAVIORS
+            behaviors: [
+                Polymer.MatPaperBehavior
+            ],
 
-            // ATTRIBUTES
-            hostAttributes: {
-                'header': true
-            },
+            /*********************************************************************/
 
             // PROPERTIES
             properties: {
 
                 /**
-                 * The paper's background color.
+                 * The header's brightness.
                  *
-                 * @attribute background
+                 * @attribute brightness
                  * @type string
+                 * @default "toolbar"
                  */
-                background: {
+                brightness: {
                     reflectToAttribute: true,
                     type: String,
-                    value: null
+                    value: 'toolbar'
                 },
 
                 /**
@@ -244,26 +234,7 @@ The header's contents can also be customized by adding any additional tags into 
                 drawer: {
                     notify: true,
                     observer: '_drawerChanged',
-                    readOnly: true,
-                    type: Object,
-                    value: null
-                },
-
-                /**
-                 * If set to true, the extended is hidden.
-                 *
-                 * @attribute empty-extended
-                 * @type boolean
-                 * @default false
-                 * @notifies
-                 * @readonly
-                 */
-                emptyExtended: {
-                    notify: true,
-                    readOnly: true,
-                    reflectToAttribute: true,
-                    type: Boolean,
-                    value: false
+                    readOnly: true
                 },
 
                 /**
@@ -277,22 +248,6 @@ The header's contents can also be customized by adding any additional tags into 
                     reflectToAttribute: true,
                     type: Boolean,
                     value: false
-                },
-
-                /**
-                 * The parent panel.
-                 *
-                 * @attribute panel
-                 * @type Element
-                 * @notifies
-                 * @readonly
-                 */
-                panel: {
-                    notify: true,
-                    observer: '_panelChanged',
-                    readOnly: true,
-                    type: Object,
-                    value: null
                 },
 
                 /**
@@ -313,18 +268,29 @@ The header's contents can also be customized by adding any additional tags into 
                 },
 
                 /**
-                 * The paper's z-axis position.
+                 * The header's panel's scroll amount.
                  *
-                 * @attribute z
+                 * @attribute scrolled
                  * @type number
                  * @default 0
-                 * @notifies
                  * @readonly
                  */
-                z: {
-                    notify: true,
+                scrolled: {
                     readOnly: true,
-                    reflectToAttribute: true,
+                    type: Number,
+                    value: 0
+                },
+
+                /**
+                 * The header's top distance.
+                 *
+                 * @attribute top
+                 * @type number
+                 * @default 0
+                 * @readonly
+                 */
+                top: {
+                    readOnly: true,
                     type: Number,
                     value: 0
                 }
@@ -333,37 +299,21 @@ The header's contents can also be customized by adding any additional tags into 
             /*********************************************************************/
 
             // OBSERVER
-            _drawerChanged: function (post, pre) {
+            _drawerChanged: function () {
 
                 // Vars
-                var self = this;
+                var self   = this,
+                    empty  = (self.drawer && self.drawer.empty) || false,
+                    narrow = (self.drawer && self.drawer.narrow) || false;
 
-                // Checking
-                if (arguments.length < 2) { return; }
+                // Disconnecting
+                if (self.drawerObserver) { self.drawerObserver.disconnect(); }
 
-                // Listening
-                if (pre) { self.unlisten(pre, 'empty-changed', '_handleDrawer'); self.unlisten(pre, 'narrow-changed', '_handleDrawer'); }
-                if (post) { self.listen(post, 'empty-changed', '_handleDrawer'); self.listen(post, 'narrow-changed', '_handleDrawer'); }
+                // Setting
+                self._setNav(narrow && !empty);
 
-                // Handling
-                self._handleDrawer();
-            },
-
-            // OBSERVER
-            _panelChanged: function (post, pre) {
-
-                // Vars
-                var self = this;
-
-                // Checking
-                if (arguments.length < 2) { return; }
-
-                // Listening
-                if (pre) { self.unlisten(pre, 'mode-changed', '_handlePanel'); self.unlisten(pre, 'scrolled-changed', '_handlePanel'); }
-                if (post) { self.listen(post, 'mode-changed', '_handlePanel'); self.listen(post, 'scrolled-changed', '_handlePanel'); }
-
-                // Handling
-                self._handlePanel();
+                // Observing
+                if (self.drawer) { self.drawerObserver = XP.onMutation(self.drawer, self._drawerChanged.bind(self), {attributes: true, attributeFilter: ['empty', 'narrow']}); }
             },
 
             /*********************************************************************/
@@ -372,68 +322,29 @@ The header's contents can also be customized by adding any additional tags into 
             attached: function () {
 
                 // Vars
-                var self        = this,
-                    drawer      = XP.findParentElement(Polymer.dom(self), '[drawer=""]'),
-                    drawerPanel = XP.findParentElement(Polymer.dom(self), 'mat-drawer-panel'),
-                    headerPanel = XP.findParentElement(Polymer.dom(self), 'mat-header-panel');
+                var self   = this,
+                    drawer = XP.findParentElement(Polymer.dom(self), '.drawer'),
+                    panel  = XP.findParentElement(Polymer.dom(self), '.drawer-panel');
 
                 // Setting
-                self._setDrawer((!drawer && drawerPanel && drawerPanel.drawer) || null);
-                self._setPanel(headerPanel);
+                self._setDrawer((!drawer && panel && panel.drawer) || null);
 
                 // Delaying
-                XP.delay(self._setDrawer.bind(self, (!drawer && drawerPanel && drawerPanel.drawer) || null), 2, true);
+                if (!self.drawwer) { XP.delay(function () { self._setDrawer((!drawer && panel && panel.drawer) || null); }, 2, true); }
+            },
 
-                // Mutating
-                self.mutated();
+            // LISTENER
+            created: function () {
+
+                // Classifying
+                this.classList.add('header');
             },
 
             // LISTENER
             detached: function () {
 
-                // Vars
-                var self = this;
-
                 // Setting
-                self._setDrawer(null);
-                self._setPanel(null);
-            },
-
-            // LISTENER
-            mutated: function () {
-
-                // Vars
-                var self = this;
-
-                // Setting
-                self._setEmptyExtended(!XP.isContent(Polymer.dom(self.$.extendedContent), true));
-
-                // Observing
-                XP.onMutation(self, self.mutated.bind(self));
-            },
-
-            /*********************************************************************/
-
-            // HANDLER
-            _handleDrawer: function () {
-
-                // Vars
-                var self = this;
-
-                // Setting
-                self._setNav(!!self.drawer && self.drawer.narrow && !self.drawer.empty);
-            },
-
-            // HANDLER
-            _handlePanel: function () {
-
-                // Vars
-                var self     = this,
-                    mode     = self.panel ? self.panel.mode : 'default',
-                    scrolled = self.panel ? self.panel.scrolled : 0;
-
-                // Setting
-                self._setZ(mode === 'fixed' || (scrolled && (mode === 'default' || mode === 'waterfall')) ? 4 : 0);
+                this._setDrawer(null);
             }
         });
     </script>
