@@ -114,8 +114,8 @@ The header's contents can also be customized by adding any additional tags into 
             :host .main ::content > .label {
                 @apply(--layout-flex);
                 overflow: hidden;
-                text-overflow: ellipsis !important;
-                white-space: nowrap !important;
+                text-overflow: ellipsis !important; /* override */
+                white-space: nowrap !important; /* override */
             }
 
             :host .button {
@@ -137,11 +137,11 @@ The header's contents can also be customized by adding any additional tags into 
                 padding-left: 72px;
             }
 
-            :host .extended ::content mat-tabs {
+            :host .extended ::content .tabs {
                 margin: 0 -16px;
             }
 
-            :host([inset]) .extended ::content mat-tabs {
+            :host([inset]) .extended ::content .tabs {
                 margin-left: -72px;
             }
 
@@ -172,11 +172,11 @@ The header's contents can also be customized by adding any additional tags into 
                     padding-left: 80px;
                 }
 
-                :host .extended ::content mat-tabs {
+                :host .extended ::content .tabs {
                     margin: 0 -24px;
                 }
 
-                :host([inset]) .extended ::content mat-tabs {
+                :host([inset]) .extended ::content .tabs {
                     margin-left: -80px;
                 }
             }
